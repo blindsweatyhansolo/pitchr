@@ -34,8 +34,8 @@ router.get('/:id', (req, res) => {
             'createdAt',
             'updatedAt', 
             // [
-            //     sequelize.literal('(SELECT COUNT(*) FROM vote WHERE project_id = vote.project_id)'),
-            //     'vote_count'
+            //     sequelize.literal('(SELECT COUNT(*) FROM vote WHERE projectId = vote.projectId)'),
+            //     'voteCount'
             // ]
         ],
         // UPDATE THIS AFTER ALL MODELS HAVE BEEN CREATED

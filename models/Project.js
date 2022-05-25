@@ -1,8 +1,34 @@
 // PROJECT MODEL
+const req = require('express/lib/request');
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Project extends Model {};
+class Project extends Model {
+    // MODEL METHOD FOR VOTING
+    // static upvote(body, models) {
+    //     return models.Vote.create({
+    //         creatorId : body.creatorId,
+    //         projectId : body.projectId
+    //     })
+    //     .then(() => {
+    //         return Project.findOne({
+    //             where: {
+    //                 id: body.projectId
+    //             },
+    //             attributes: [
+    //                 'id',
+    //                 'title',
+    //                 'description',
+    //                 'creator',
+    //                 [
+    //                     sequelize.literal('(SELECT COUNT(*) FROM vote WHERE projectId = vote.projectId)'),
+    //                     'voteCount'
+    //                 ]
+    //             ]
+    //         });
+    //     });
+    // }
+};
 
 Project.init(
     {
@@ -29,7 +55,7 @@ Project.init(
             // foreign key association with user id
             // type: DataTypes.INTEGER,
             // references: {
-            //     model: User,
+            //     model: user,
             //     key: 'id'
             // }
         // },
@@ -45,7 +71,7 @@ Project.init(
             // type: DataTypes.INTEGER,
             // allowNull: true,
             // references: {
-            //     model: Keyword,
+            //     model: keyword,
             //     key: 'id'
             // }
         // }
