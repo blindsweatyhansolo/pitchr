@@ -1,8 +1,8 @@
 // PROJECTKEYWORD MODEL
 // this model is necessary to properly assign mulitple keywords to
 // a single project using the through() method in associations
-
 const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
 
 class ProjectKeyword extends Model {};
 
