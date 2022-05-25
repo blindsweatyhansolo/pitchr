@@ -3,7 +3,7 @@ const router = require('express').Router();
 // import sequelize to use literals for vote totals
 const sequelize = require('../../config/connection');
 // import all models
-const { Project } = require('../../models');
+const { Project, Vote } = require('../../models');
 
 // GET all Projects (/api/projects)
 // includes User, Keyword, Vote, and Comment data
@@ -92,6 +92,16 @@ router.post('/', (req, res) => {
 // PUT route for upvoting project (/api/projects/upvote)
 // MUST BE DEFINED BEFORE PUT /:id ROUTE!
 // active session must exist, set up later with session
+router.put('/upvote', (req, res) => {
+    // pass creator/user id (from session) along with all destructured properties on req.body
+    // into static model method created in Project model
+    Project.upvote({ ...req.body, creatorId: req.session.userId}, { Vote, Comment, User })
+    .then(updatedVoteData => res.json(updatedVoteData))
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
 
 // PUT update Project's title, description, value (/api/projects/:id)
 // active session must exist, set up later with session
