@@ -57,7 +57,7 @@ router.get('/:id', (req, res) => {
     .then(dbProjectData => {
         // if no matching id
         if (!dbProjectData) {
-            res.status(404).json(err);
+            res.status(404).json({ message: 'No project found with this id!' });
             return;
         }
 
@@ -70,7 +70,7 @@ router.get('/:id', (req, res) => {
 });
 
 // POST new Project (/api/projects)
-// active session must exist
+// active session must exist, set up later with session
 router.post('/', (req, res) => {
     Project.create({
         // TEMPORARY PARAMS FOR TESTING
@@ -89,7 +89,63 @@ router.post('/', (req, res) => {
     });
 });
 
-// 
+// PUT route for upvoting project (/api/projects/upvote)
+// MUST BE DEFINED BEFORE PUT /:id ROUTE!
+// active session must exist, set up later with session
+
+// PUT update Project's title, description, value (/api/projects/:id)
+// active session must exist, set up later with session
+router.put('/:id', (req, res) => {
+    // update() method combines looking up and updating data
+    Project.update(
+        {
+            // THESE FIELDS SHOULD MATCH FRONT-END PROJECT EDIT SUBMISSION FORM
+            title: req.body.title,
+            description: req.body.description,
+            value: req.body.value
+        },
+        {
+            where: {
+                id: req.params.id
+            }
+        }
+    )
+    .then(dbProjectData => {
+        // if no matching id
+        if (!dbProjectData) {
+            res.status(404).json({ message: 'No project found with this id!' });
+        }
+
+        res.json({ message: 'Successfully updated!' });
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(400).json(err);
+    });
+});
+
+// DELETE remove Project (/api/projects/:id)
+// require active session and authorization for deleting projects
+router.delete('/:id', (req, res) => {
+    // destroy() method combines looking up and deleting data
+    Project.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+    .then(dbProjectData => {
+        // if no mathing id
+        if (!dbProjectData) {
+            res.status(404).json({ message: 'No project found with this id!' });
+        }
+
+        res.json({ message: 'Project deleted.' });
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(400).json(err);
+    });
+});
 
 
 // EXPORT
