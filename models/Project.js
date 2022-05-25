@@ -1,6 +1,6 @@
 // PROJECT MODEL
-const sequelize = require('../config/connection');
 const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
 
 class Project extends Model {};
 
@@ -24,32 +24,35 @@ Project.init(
             type: DataTypes.TEXT,
             allowNull: false
         },
-        creator: {
+        // creator: {
+            // UPDATE THIS AFTER USER MODEL CREATION
             // foreign key association with user id
-            type: DataTypes.INTEGER,
-            references: {
-                model: User,
-                key: 'id'
-            }
-        },
+            // type: DataTypes.INTEGER,
+            // references: {
+            //     model: User,
+            //     key: 'id'
+            // }
+        // },
         value: {
             // true - closed, false - open
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false
         },
-        keyword: {
+        // keyword: {
+            // UPDATE THIS AFTER KEYWORD MODEL CREATION
             // foreign key association with keyword id
-            type: DataTypes.INTEGER,
-            allowNull: true,
-            references: {
-                model: Keyword,
-                key: 'id'
-            }
-        }
+            // type: DataTypes.INTEGER,
+            // allowNull: true,
+            // references: {
+            //     model: Keyword,
+            //     key: 'id'
+            // }
+        // }
     },
     {
         sequelize,
+        timestamps: true,
         freezeTableName: true,
         underscored: false,
         modelName: 'project'
