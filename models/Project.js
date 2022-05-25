@@ -64,16 +64,7 @@ Project.init(
             allowNull: false,
             defaultValue: false
         },
-        // keyword: {
-            // UPDATE THIS AFTER KEYWORD MODEL CREATION
-            // foreign key association with keyword id
-            // type: DataTypes.INTEGER,
-            // allowNull: true,
-            // references: {
-            //     model: keyword,
-            //     key: 'id'
-            // }
-        // }
+        // KEYWORD FIELD IS NOW UNNECCESSARY, ASSOCIATION SET THROUGH ProjectKeyword MODEL
     },
     {
         sequelize,
