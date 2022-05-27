@@ -1,7 +1,6 @@
 // PROJECT MODEL
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
-// const { User } = require('../models');
 
 class Project extends Model {
     // MODEL METHOD FOR VOTING
