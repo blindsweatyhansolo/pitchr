@@ -7,7 +7,7 @@ class Project extends Model {
     // MODEL METHOD FOR VOTING
     // static upvote(body, models) {
     //     return models.Vote.create({
-    //         creatorId : body.creatorId,
+    //         userId : body.userId,
     //         projectId : body.projectId
     //     })
     //     .then(() => {

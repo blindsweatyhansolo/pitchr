@@ -8,18 +8,18 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 const sequelize = require('./config/connection');
-// const session = require('express-session');
-// const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const session = require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-// const sess = {
-//     secret: process.env.SECRET,
-//     cookie: {},
-//     resave: false,
-//     saveUninitialized: true,
-//     store: new SequelizeStore({
-//         db: sequelize
-//     })
-// };
+const sess = {
+    secret: process.env.SECRET,
+    cookie: {},
+    resave: false,
+    saveUninitialized: true,
+    store: new SequelizeStore({
+        db: sequelize
+    })
+};
 
 // // helpers section placeholder //
 // const helpers = require('./utils/helpers');
@@ -27,7 +27,7 @@ const sequelize = require('./config/connection');
 
 
 // middleware
-// app.use(session(sess));
+app.use(session(sess));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -42,7 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(routes);
 
 // connection to db and server
-sequelize.sync({ force: true })
+sequelize.sync({ force: false })
   .then(() => {
     console.log("Database connected . . .");
     app.listen(PORT, () => console.log(`NOW LISTENING ON PORT ${PORT}`));

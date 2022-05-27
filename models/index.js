@@ -17,18 +17,20 @@ Project.belongsTo(User, {
 });
 
 // CONNECT ONE USER TO MANY PROJECTS THROUGH VOTE
-// User.belongsToMany(Project, {
-//     through: Vote,
-//     as: 'votedProject',
-//     foreignKey:'creatorId'
-// });
+// as: 'votedProject' used as the name of the Vote model when queried on
+User.belongsToMany(Project, {
+    through: Vote,
+    as: 'votedProject',
+    foreignKey:'userId'
+});
 
 // // CONNECT ONE PROJECT TO MANY USERS THROUGH VOTE
-// Project.belongsToMany(User, {
-//     through: Vote,
-//     as: 'votedProject',
-//     foreignKey: 'projectId'
-// });
+// as: 'votedProject' used as the name of the Vote model when queried on
+Project.belongsToMany(User, {
+    through: Vote,
+    as: 'votedProject',
+    foreignKey: 'projectId'
+});
 
 // CONNECT ONE VOTE TO SINGLE USER
 Vote.belongsTo(User, {
