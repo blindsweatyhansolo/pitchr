@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const sequelize = require('../config/connection');
+const sequelize = require('../../config/connection');
+const { Comment, User, Project } = require('../../models');
 
 router.get('/', (req, res) => {
     Comment.findAll()
@@ -12,12 +13,12 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     Comment.findOne({
         where: {
-            user_id: req.session.user_id
+            id: req.params.id
         },
         attributes: [
             'id',
             'text',
-            'CreatedAt',
+            'createdAt',
         ],
         include: [
             {
@@ -25,8 +26,12 @@ router.get('/:id', (req, res) => {
                 attributes: ['username'],
             },
             {
-                model: post,
-                attributes: ['id', 'username'],
+                model: Project,
+                attributes: ['id'],
+                include: {
+                    model: User,
+                    attributes: ['username']
+                }
             }
         ]
     })
@@ -39,8 +44,9 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     Comment.create({
         text: req.body.text,
-        post_id: req.body.post_id,
-        creator_id: req.session.user_id
+        projectId: req.body.projectId,
+        userId: req.body.userId
+        // creatorId: req.session.userId
     })
     .then(dbCommentData => res.json(dbCommentData))
     .catch(err => {

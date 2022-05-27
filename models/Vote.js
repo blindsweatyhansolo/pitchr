@@ -12,7 +12,7 @@ Vote.init(
             autoIncrement: true
         },
         // UPDATE TO INCLUDE THESE FIELDS ONCE MERGED WITH ALL MODELS
-        creatorId: {
+        userId: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {

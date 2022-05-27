@@ -4,15 +4,16 @@ const Vote = require('./Vote');
 const Keyword = require('./Keyword');
 const ProjectKeyword = require('./ProjectKeyword');
 const User = require('./User');
+const Comment = require('./Comment');
 
 // CONNET ONE USER TO MANY PROJECTS
 User.hasMany(Project, {
-    foreignKey: 'creator'
+    foreignKey: 'userId'
 });
 
 // CONNET ONE PROJECT TO ONE USER
 Project.belongsTo(User, {
-    foreignKey: 'creator'
+    foreignKey: 'userId'
 });
 
 // CONNECT ONE USER TO MANY PROJECTS THROUGH VOTE
@@ -31,7 +32,7 @@ Project.belongsTo(User, {
 
 // CONNECT ONE VOTE TO SINGLE USER
 Vote.belongsTo(User, {
-    foreignKey: 'creatorId'
+    foreignKey: 'userId'
 });
 
 // CONNECT ONE VOTE TO SINGLE PROJECT
@@ -41,7 +42,7 @@ Vote.belongsTo(Project, {
 
 // CONNECT ONE USER TO THEIR MANY VOTES
 User.hasMany(Vote, {
-    foreignKey: 'creatorId'
+    foreignKey: 'userId'
 });
 
 // CONNECT ONE PROJECT TO MANY VOTES
@@ -62,17 +63,23 @@ Project.hasMany(Vote, {
 // });
 
 // CONNECT ONE COMMENT TO ONE USER
+Comment.belongsTo(User, {
+    foreignKey: 'userId'
+});
 
 // CONNECT ONE COMMENT TO ONE PROJECT
+Comment.belongsTo(Project, {
+    foreignKey: 'projectId'
+});
 
 // COMMENT ONE USER TO MANY COMMENTS
-// User.hasMany(Comment, {
-//     foreignKey: ''
-// })
+User.hasMany(Comment, {
+    foreignKey: 'userId'
+});
 
 // CONNECT ONE POST TO MANY COMMENTS
-// Project.hasMany(Comment, {
-//     foreignKey: ''
-// });
+Project.hasMany(Comment, {
+    foreignKey: 'projectId'
+});
 
-module.exports = { Project, Vote, Keyword, ProjectKeyword, User };
+module.exports = { Project, Vote, Keyword, ProjectKeyword, User, Comment };

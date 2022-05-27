@@ -50,7 +50,7 @@ Project.init(
             type: DataTypes.TEXT,
             allowNull: false
         },
-        creator: {
+        userId: {
             // UPDATE THIS AFTER USER MODEL CREATION
             // foreign key association with user id
             type: DataTypes.INTEGER,

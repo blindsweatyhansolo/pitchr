@@ -17,24 +17,29 @@ Comment.init(
             type: DataTypes.STRING,
             allownull: false
         },
-        project: {
+        projectId: {
+            type: DataTypes.INTEGER,
             allownull: false,
             references: {
-                project: '',
-                key: ''
+                model: 'project',
+                key: 'id'
             }
         },
-        creator: {
+        userId: {
+            type: DataTypes.INTEGER,
             allownull: false,
             reference: {
-                creator: '',
-                key: ''
+                model: 'user',
+                key: 'id'
             }
         }
     },
     {
         sequelize,
-        Timestamps: true,
+        timestamps: true,
+        underscored: false,
+        freezeTableName: true, //sequilize pluralizes model/table name
+        modelName: 'comment'
     }
 )
 

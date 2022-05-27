@@ -3,7 +3,7 @@ const router = require('express').Router();
 // import sequelize to use literals for vote totals
 const sequelize = require('../../config/connection');
 // import all models
-const { Project, Vote } = require('../../models');
+const { Project, Vote, User, Comment } = require('../../models');
 
 // GET all Projects (/api/projects)
 // includes User, Keyword, Vote, and Comment data
@@ -80,7 +80,7 @@ router.post('/', (req, res) => {
         value: req.body.value,
         // UPDATE LATER SO USER/CREATOR VALUE GRABBED FROM SESSION
         // creator: req.session.userId
-        creator: req.body.creator
+        userId: req.body.userId
     })
     .then(dbProjectData => res.json(dbProjectData))
     .catch(err => {
@@ -95,7 +95,7 @@ router.post('/', (req, res) => {
 router.put('/upvote', (req, res) => {
     // pass creator/user id (from session) along with all destructured properties on req.body
     // into static model method created in Project model
-    Project.upvote({ ...req.body, creatorId: req.session.userId}, { Vote, Comment, User })
+    Project.upvote({ ...req.body, userId: req.session.userId}, { Vote, Comment, User })
     .then(updatedVoteData => res.json(updatedVoteData))
     .catch(err => {
         console.log(err);
