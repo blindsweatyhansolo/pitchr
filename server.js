@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 // handlebars setup
 const exphbs = require('express-handlebars');
-// const routes = require('./controllers');
+const routes = require('./controllers');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -39,10 +39,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.set('view engine', 'handlebars');
 
 // turn on routes
-// app.use(routes);
+app.use(routes);
 
 // connection to db and server
-sequelize.sync({ force: false })
+sequelize.sync({ force: true })
   .then(() => {
     console.log("Database connected . . .");
     app.listen(PORT, () => console.log(`NOW LISTENING ON PORT ${PORT}`));
