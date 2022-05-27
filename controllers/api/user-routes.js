@@ -8,7 +8,7 @@ const { User } = require("../../models");
 router.get("/", async (req, res) => {
   const user = await User.findAll(
     {
-      // attributes: { exclude: ['password'] }
+      attributes: { exclude: ['password'] }
     }
   );
   res.json(user);
@@ -30,6 +30,33 @@ router.post("/", async (req, res) => {
   const user = await User.create(req.body);
   res.json(user)
 });
+
+//login route using post method
+router.post("/login", (req, res) => {
+  User.findOne({
+    where: {
+      email: req.body.email,
+    },
+  }).then(dbUserData => {
+    if(!dbUserData) {
+      res.status(404).json({ message: 'User not found!'});
+      return;
+    }
+
+    const validPassword = dbUserData.checkPassword(req.body.password);
+
+    if (!validPassword) {
+      res.status(400).json({ message: 'Incorrect Password!'});
+      return;
+    }
+
+    res.json(dbUserData);
+  })
+
+});
+
+
+
 
 
 router.put('/:id', (req, res) => {
