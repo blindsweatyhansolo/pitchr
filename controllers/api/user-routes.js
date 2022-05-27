@@ -15,7 +15,6 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-  // find one category by its `id` value
   const user = await User.findOne({
     where: {
       id: req.params.id, 
@@ -25,11 +24,25 @@ router.get("/:id", async (req, res) => {
   res.json(user);
 });
 
-router.post("/", async (req, res) => {
-  // create a new category
-  const user = await User.create(req.body);
-  res.json(user)
+router.post("/", (req, res) => {
+  User.create({ 
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password
+   }).then(dbUserData => {
+      req.session.save(() => {
+        req.session.userId = dbUserData.id;
+        req.session.username = dbUserData.username;
+        req.session.loggedIn = true;
+        res.json(dbUserData);
+      })
+   })
+   .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+   });
 });
+
 
 //login route using post method
 router.post("/login", (req, res) => {
@@ -54,10 +67,6 @@ router.post("/login", (req, res) => {
   })
 
 });
-
-
-
-
 
 router.put('/:id', (req, res) => {
   User.update(req.body, {
