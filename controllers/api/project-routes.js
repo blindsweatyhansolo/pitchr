@@ -118,40 +118,17 @@ router.post('/', (req, res) => {
 // MUST BE DEFINED BEFORE PUT /:id ROUTE!
 // active session must exist, set up later with session
 router.put('/upvote', (req, res) => {
-    Vote.create({
-        userId: req.body.userId,
-        projectId: req.body.projectId
-    })
-    .then(() => {
-        return Project.findOne({
-            where: {
-                id: req.body.projectId
-            },
-            attributes: [
-                'id',
-                'title',
-                'description',
-                'value',
-                'createdAt',
-                [
-                    sequelize.literal('(SELECT COUNT(*) FROM vote WHERE projectId = vote.projectId)'),
-                    'voteCount'
-                ]
-            ]
-        })
-        .then(dbProjectData => res.json(dbProjectData))
-        .catch(err=> res.json(err));
-    });
-
-    // pass creator/user id (from session) along with all destructured properties on req.body
-    // into static model method created in Project model
-
+    // pass user id from session (userId: req.session.userId) UPDATE ME!!
+    // along with all destructured properties on req.body
+    // into static model method created in Project model: upvote(body, models)
+    // ONCE MERGED WITH ALL SESSION WORK, CHANGE TO >> 
     // Project.upvote({ ...req.body, userId: req.session.userId}, { Vote, Comment, User })
-    // .then(updatedVoteData => res.json(updatedVoteData))
-    // .catch(err => {
-    //     console.log(err);
-    //     res.status(500).json(err);
-    // });
+    Project.upvote(req.body, { Vote })
+    .then(updatedProjectData => res.json(updatedProjectData))
+    .catch(err => {
+        console.log(err);
+        res.status(400).json(err);
+    });
 });
 
 // PUT update Project's title, description, value (/api/projects/:id)

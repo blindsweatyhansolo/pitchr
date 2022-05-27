@@ -4,29 +4,38 @@ const sequelize = require('../config/connection');
 
 class Project extends Model {
     // MODEL METHOD FOR VOTING
-    // static upvote(body, models) {
-    //     return models.Vote.create({
-    //         userId : body.userId,
-    //         projectId : body.projectId
-    //     })
-    //     .then(() => {
-    //         return Project.findOne({
-    //             where: {
-    //                 id: body.projectId
-    //             },
-    //             attributes: [
-    //                 'id',
-    //                 'title',
-    //                 'description',
-    //                 'creator',
-    //                 [
-    //                     sequelize.literal('(SELECT COUNT(*) FROM vote WHERE projectId = vote.projectId)'),
-    //                     'voteCount'
-    //                 ]
-    //             ]
-    //         });
-    //     });
-    // }
+    // static indicates that the upvote() method is one based on Project model and not
+    // an INSTANCE METHOD, allows us to use Project.upvote() as if it were one of Sequelize's
+    // built-in methods, passing in the value of req.body as 'body' and an object of the
+    // models as 'models'
+    static upvote(body, models) {
+        // using gathered values, create a new object in Vote model
+        return models.Vote.create({
+            userId : body.userId,
+            projectId : body.projectId
+        })
+        .then(() => {
+            // using the gathered projectId, find specified Project with findOne()
+            // returning all defined attributes including sequelize.literal() of 
+            // vote total as 'voteCount'
+            return Project.findOne({
+                where: {
+                    id: body.projectId
+                },
+                attributes: [
+                    'id',
+                    'title',
+                    'description',
+                    'value',
+                    'createdAt'
+                    [
+                        sequelize.literal('(SELECT COUNT(*) FROM vote WHERE projectId = vote.projectId)'),
+                        'voteCount'
+                    ]
+                ]
+            });
+        });
+    }
 };
 
 Project.init(
