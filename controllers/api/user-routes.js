@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const sequelize = require("../../config/connection");
 const { User } = require("../../models");
+const { destroy } = require("../../models/User");
 
 
 // The `/api/categories` endpoint
@@ -70,6 +71,14 @@ router.post("/login", (req, res) => {
       res.json(dbUserData);
     });
   });
+});
+
+router.post('/logout', async (req,res) => {
+  if (req.session.loggedIn) {
+    await req.session.destroy(() => {
+      res.status(204).end();
+    });
+  }
 });
 
 router.put('/:id', (req, res) => {
