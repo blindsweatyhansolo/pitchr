@@ -1,21 +1,22 @@
-
-const sequelize = require("../config/connection");
-const {Model, DataTypes} = require("sequelize");
-const { User } = require("../models");
 const router = require("express").Router();
+const sequelize = require("../../config/connection");
+const { User } = require("../../models");
 
 
 // The `/api/categories` endpoint
 
 router.get("/", async (req, res) => {
-  const user = await User.findAll({
-  });
+  const user = await User.findAll(
+    {
+      attributes: { exclude: ['password'] }
+    }
+  );
   res.json(user);
 });
 
 router.get("/:id", async (req, res) => {
   // find one category by its `id` value
-  const user = await User.findAll({
+  const user = await User.findOne({
     where: {
       id: req.params.id, 
     },

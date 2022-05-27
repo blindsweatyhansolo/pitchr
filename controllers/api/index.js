@@ -11,7 +11,7 @@ router.use('/projects', projectRoutes);
 // appends '/keywords' to all KEYWORD routes
 router.use('/keywords', keywordRoutes);
 // appends '/users' to all USER routes
-router.use('/user', userRoutes);
+router.use('/users', userRoutes);
 
 // EXPORT
 module.exports = router;

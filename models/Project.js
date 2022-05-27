@@ -1,6 +1,7 @@
 // PROJECT MODEL
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+// const { User } = require('../models');
 
 class Project extends Model {
     // MODEL METHOD FOR VOTING
@@ -49,15 +50,15 @@ Project.init(
             type: DataTypes.TEXT,
             allowNull: false
         },
-        // creator: {
+        creator: {
             // UPDATE THIS AFTER USER MODEL CREATION
             // foreign key association with user id
-            // type: DataTypes.INTEGER,
-            // references: {
-            //     model: user,
-            //     key: 'id'
-            // }
-        // },
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'user',
+                key: 'id'
+            }
+        },
         value: {
             // true - closed, false - open
             type: DataTypes.BOOLEAN,

@@ -12,22 +12,22 @@ Vote.init(
             autoIncrement: true
         },
         // UPDATE TO INCLUDE THESE FIELDS ONCE MERGED WITH ALL MODELS
-        // creatorId: {
-        //     type: DataTypes.INTEGER,
-        //     allowNull: false,
-        //     references: {
-        //         model: 'user',
-        //         key: 'id'
-        //     }
-        // },
-        // projectId: {
-        //     type: DataTypes.INTEGER,
-        //     allowNull: false,
-        //     references: {
-        //         model: 'project',
-        //         key: 'id'
-        //     }
-        // }
+        creatorId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'user',
+                key: 'id'
+            }
+        },
+        projectId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'project',
+                key: 'id'
+            }
+        }
     },
     {
         sequelize,
