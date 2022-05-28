@@ -1,1 +1,8 @@
 {{!-- HOMEPAGE --}}
+<ol>
+{{#each projects as |project|}}
+    <li>
+        {{> project-info project}}
+    </li>
+{{/each}}
+</ol>

@@ -23,6 +23,7 @@ const sess = {
 
 // // helpers section placeholder //
 // const helpers = require('./utils/helpers');
+const hbs = exphbs.create({});
 // const hbs = exphbs.create({ helpers });
 
 
