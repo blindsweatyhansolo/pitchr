@@ -1,16 +1,13 @@
 {{!-- PARTIAL FOR PROJECTS --}}
 <article class="project">
     <div class="title">
-        <h2>
-            {{ title }}
-        </h2>
+        <a href="/project/{{id}}">{{ title }}</a>
     </div>
-    <h2>
-        {{ user.username }}
-    </h2>
+    <p>
+        by: {{ user.username }}
+    </p>
     <p>
         {{ description }}
     </p>
 
-    
 </article>
