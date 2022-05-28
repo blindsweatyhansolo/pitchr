@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const sequelize = require("../../config/connection");
-const { User } = require("../../models");
-const { destroy } = require("../../models/User");
+
+const { User, Project, Vote } = require("../../models");
 
 
 // The `/api/categories` endpoint
@@ -20,6 +20,20 @@ router.get("/:id", async (req, res) => {
     where: {
       id: req.params.id, 
     },
+    include: [
+      {
+        // include any projects User has created
+        model: Project,
+        attributes: ['id', 'title', 'createdAt']
+      },
+      {
+        // include any projects User has VOTED on using 'through'
+        model: Project,
+        attributes: ['title'],
+        through: Vote,
+        as: 'votedProject'
+      }
+    ]
   });
   // be sure to include its associated Products
   res.json(user);

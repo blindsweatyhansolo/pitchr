@@ -9,7 +9,34 @@ const { Project, Vote, User, Comment } = require('../../models');
 // includes User, Keyword, Vote, and Comment data
 router.get('/', (req, res) => {
     // UPDATE THIS AFTER ALL MODELS HAVE BEEN CREATED
-    Project.findAll()
+    Project.findAll({
+        attributes: [
+            'id', 
+            'title',
+            'description', 
+            'value',
+            'createdAt',
+            'updatedAt', 
+            [
+                sequelize.literal('(SELECT COUNT(*) FROM vote WHERE projectId = vote.projectId)'),
+                'voteCount'
+            ]
+        ],
+        include: [
+            {
+                model: Comment,
+                attributes: ['id', 'text', 'projectId', 'userId', 'createdAt'],
+                include: {
+                    model: User,
+                    attributes: ['username']
+                }
+            },
+            {
+                model: User,
+                attributes: ['username']
+            }
+        ]
+    })
     .then(dbProjectData => res.json(dbProjectData))
     .catch(err => {
         console.log(err);
@@ -28,31 +55,29 @@ router.get('/:id', (req, res) => {
             'id', 
             'title',
             'description', 
-            // 'creator',
             'value',
-            // 'keyword',
             'createdAt',
             'updatedAt', 
-            // [
-            //     sequelize.literal('(SELECT COUNT(*) FROM vote WHERE projectId = vote.projectId)'),
-            //     'voteCount'
-            // ]
+            [
+                sequelize.literal('(SELECT COUNT(*) FROM vote WHERE projectId = vote.projectId)'),
+                'voteCount'
+            ]
         ],
         // UPDATE THIS AFTER ALL MODELS HAVE BEEN CREATED
-        // include: [
-        //     {
-        //         model: Comment,
-        //         attributes: [...],
-        //         include: {
-        //             model: User,
-        //             attributes: ['username']
-        //         }
-        //     },
-        //     {
-        //         model: User,
-        //         attributes: ['username']
-        //     }
-        // ]   
+        include: [
+            {
+                model: Comment,
+                attributes: ['id', 'text', 'projectId', 'userId', 'createdAt'],
+                include: {
+                    model: User,
+                    attributes: ['username']
+                }
+            },
+            {
+                model: User,
+                attributes: ['username']
+            }
+        ]   
     })
     .then(dbProjectData => {
         // if no matching id
@@ -93,13 +118,16 @@ router.post('/', (req, res) => {
 // MUST BE DEFINED BEFORE PUT /:id ROUTE!
 // active session must exist, set up later with session
 router.put('/upvote', (req, res) => {
-    // pass creator/user id (from session) along with all destructured properties on req.body
-    // into static model method created in Project model
-    Project.upvote({ ...req.body, userId: req.session.userId}, { Vote, Comment, User })
-    .then(updatedVoteData => res.json(updatedVoteData))
+    // pass user id from session (userId: req.session.userId) UPDATE ME!!
+    // along with all destructured properties on req.body
+    // into static model method created in Project model: upvote(body, models)
+    // ONCE MERGED WITH ALL SESSION WORK, CHANGE TO >> 
+    // Project.upvote({ ...req.body, userId: req.session.userId}, { Vote, Comment, User })
+    Project.upvote(req.body, { Vote })
+    .then(updatedProjectData => res.json(updatedProjectData))
     .catch(err => {
         console.log(err);
-        res.status(500).json(err);
+        res.status(400).json(err);
     });
 });
 
