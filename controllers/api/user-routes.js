@@ -43,7 +43,8 @@ router.post("/", (req, res) => {
   User.create({ 
     username: req.body.username,
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
+    github: req.body.github
    }).then(dbUserData => {
       req.session.save(() => {
         req.session.userId = dbUserData.id;
@@ -101,19 +102,19 @@ router.put('/:id', (req, res) => {
       where: {
           id: req.params.id
       }
-  })
-.then(dbUserData => {
-  if (!dbUserData) {
-      res.status(404).json({ message: 'No user found with this id!'})
-      return;
-  }
-  res.json({ message: 'Password updated!'});  
-  })   
-.catch(err => {
-  console.log(err);
-  res.status(500).json({ message: 'Server error!'});
-  });
-})
+    })
+  .then(dbUserData => {
+    if (!dbUserData) {
+        res.status(404).json({ message: 'No user found with this id!'})
+        return;
+    }
+    res.json({ message: 'Password updated!'});  
+    })   
+  .catch(err => {
+    console.log(err);
+    res.status(500).json({ message: 'Server error!'});
+    });
+});
 
 router.delete("/:id", async (req, res) => {
   // delete a category by its `id` value
@@ -122,7 +123,7 @@ router.delete("/:id", async (req, res) => {
       id: req.params.id,
     },
   });
-  res.send()
+  res.status(200).json({ message: 'Deleted.' });
 });
 
 

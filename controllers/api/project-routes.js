@@ -124,6 +124,7 @@ router.put('/upvote', (req, res) => {
     // along with all destructured properties on req.body
     // into static model method created in Project model: upvote(body, models)
     // ONCE MERGED WITH ALL SESSION WORK, CHANGE TO >> 
+    // Project.upvote({ ...req.body, userId: req.session.userId }, { Vote, Comment, User })
     Project.upvote(req.body, { Vote, Comment, User })
     .then(updatedProjectData => res.json(updatedProjectData))
     .catch(err => {
