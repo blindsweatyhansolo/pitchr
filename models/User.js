@@ -1,19 +1,13 @@
 // USER MODEL
-
 const sequelize = require("../config/connection");
 const {Model, DataTypes} = require("sequelize");
 const bcrypt = require('bcrypt');
-
-//bcrypt.hash(myPlaintextPassword, saltRounds).then(function(hash) {
-
-// });
 
 class User extends Model {
     checkPassword(loginPw) {
         // set up method to run on instance data (per user) to check password
         return bcrypt.compareSync(loginPw, this.password);
       }
-
 };
 
 User.init(
@@ -52,10 +46,7 @@ User.init(
             type: DataTypes.STRING,
             unique: true
         },
-        
-
     },
-
     {
         hooks: {
             async beforeCreate(newUserData) {
@@ -73,7 +64,6 @@ User.init(
         freezeTableName: true, //sequilize pluralizes model/table name
         underscored: false,
         modelName: 'user',
-        
     }
 );
 

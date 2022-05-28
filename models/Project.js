@@ -27,7 +27,7 @@ class Project extends Model {
                     'title',
                     'description',
                     'value',
-                    'createdAt'
+                    'createdAt',
                     [
                         sequelize.literal('(SELECT COUNT(*) FROM vote WHERE projectId = vote.projectId)'),
                         'voteCount'
