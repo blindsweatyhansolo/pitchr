@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const sequelize = require("../../config/connection");
 const { User } = require("../../models");
+const { destroy } = require("../../models/User");
 
 
 // The `/api/categories` endpoint
@@ -15,7 +16,6 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-  // find one category by its `id` value
   const user = await User.findOne({
     where: {
       id: req.params.id, 
@@ -25,24 +25,81 @@ router.get("/:id", async (req, res) => {
   res.json(user);
 });
 
-router.post("/", async (req, res) => {
-  // create a new category
-  await User.create(req.body);
-  res.send()
+router.post("/", (req, res) => {
+  User.create({ 
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password
+   }).then(dbUserData => {
+      req.session.save(() => {
+        req.session.userId = dbUserData.id;
+        req.session.username = dbUserData.username;
+        req.session.loggedIn = true;
+        res.json(dbUserData);
+      })
+   })
+   .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+   });
 });
 
-router.put("/:id", async (req, res) => {
-  // update a category by its `id` value
-  await User.update(
-    req.body,
-    {
-      where: {
-        id: req.params.id,
-      },
+
+//login route using post method
+router.post("/login", (req, res) => {
+  User.findOne({
+    where: {
+      email: req.body.email,
+    },
+  }).then(dbUserData => {
+    if(!dbUserData) {
+      res.status(404).json({ message: 'User not found!'});
+      return;
     }
-  );
-  res.send()
+
+    const validPassword = dbUserData.checkPassword(req.body.password);
+
+    if (!validPassword) {
+      res.status(400).json({ message: 'Incorrect Password!'});
+      return;
+    }
+
+    req.session.save(() => {
+      req.session.userId = dbUserData.id;
+      req.session.username = dbUserData.username;
+      req.session.loggedIn = true;
+      res.json(dbUserData);
+    });
+  });
 });
+
+router.post('/logout', async (req,res) => {
+  if (req.session.loggedIn) {
+    await req.session.destroy(() => {
+      res.status(204).end();
+    });
+  }
+});
+
+router.put('/:id', (req, res) => {
+  User.update(req.body, {
+      individualHooks: true,
+      where: {
+          id: req.params.id
+      }
+  })
+.then(dbUserData => {
+  if (!dbUserData) {
+      res.status(404).json({ message: 'No user found with this id!'})
+      return;
+  }
+  res.json({ message: 'Password updated!'});  
+  })   
+.catch(err => {
+  console.log(err);
+  res.status(500).json({ message: 'Server error!'});
+  });
+})
 
 router.delete("/:id", async (req, res) => {
   // delete a category by its `id` value
@@ -53,5 +110,6 @@ router.delete("/:id", async (req, res) => {
   });
   res.send()
 });
+
 
 module.exports = router;
