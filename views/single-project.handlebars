@@ -1,5 +1,24 @@
+{{!-- {{#if loggedIn}} --}}
+
+{{!-- Project card --}}
 {{> project-info project }}
 
-    <div class="comments">
-        {{> comments project.comments }}
+{{!-- Form for adding new comment --}}
+<form class="comment-form">
+    <div>
+        <textarea name="comment-body"></textarea>
     </div>
+    <div>
+        <button type="submit">Add Comment</button>
+    </div>
+</form>
+
+{{!-- List of all past comments --}}
+<div class="comments">
+    {{> comments project.comments }}
+</div>
+
+{{!-- UPDATE WITH NON-LOCAL ROUTE! --}}
+<script src="/public/javascript/comment.js"></script>
+
+{{!-- {{/if}} --}}
