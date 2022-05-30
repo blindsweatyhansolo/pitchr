@@ -5,18 +5,18 @@ const router = require('express').Router();
 const apiRoutes = require('./api');
 const homeRoutes = require('./homeRoutes');
 
+
 // PREFIXES FOR ROUTES
 router.use('/api', apiRoutes);
 router.use('/', homeRoutes);
+
 
 // in case of request to non-existant endpoint, send 404
 router.use((req, res) => {
     res.status(404).end();
 });
 
-const favoriteRoutes = require('./favorite-routes.js');
 
-router.use('/favorites', favoriteRoutes);
 
 
 
