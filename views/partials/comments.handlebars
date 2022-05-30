@@ -1,1 +1,9 @@
 {{!-- PARTIAL FOR COMMENTS --}}
+{{#each this}}
+<div class="comment">
+    {{user.username}}
+    <p>
+        {{text}}
+    </p>
+</div>
+{{/each}}

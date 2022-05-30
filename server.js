@@ -23,6 +23,7 @@ const sess = {
 
 // // helpers section placeholder //
 // const helpers = require('./utils/helpers');
+const hbs = exphbs.create({});
 // const hbs = exphbs.create({ helpers });
 
 
@@ -35,8 +36,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // // handlebars set up
-// app.engine('handlebars', hbs.engine);
-// app.set('view engine', 'handlebars');
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
 
 // turn on routes
 app.use(routes);
