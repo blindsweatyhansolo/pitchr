@@ -12,5 +12,14 @@ router.use((req, res) => {
     res.status(404).end();
 });
 
+const favoriteRoutes = require('./favorite-routes.js');
+
+router.use('/favorites', favoriteRoutes);
+
+
+
+
+
+
 // EXPORT 
 module.exports = router;
