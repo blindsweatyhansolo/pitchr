@@ -10,6 +10,7 @@ const formatPlural = (word, amount) => {
   if (amount !== 1) {
     return `${word}s`;
   }
+  return word;
 };
 
 // Function to convert project.value to string
