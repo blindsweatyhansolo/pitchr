@@ -1,4 +1,5 @@
 // ALL ROUTES FOR PROJECT MODEL (CRUD)
+const Sequelize = require('sequelize');
 const router = require('express').Router();
 // import sequelize to use literals for vote totals
 const sequelize = require('../../config/connection');
@@ -11,18 +12,9 @@ const withAuth = require('../../utils/auth');
 router.get('/', (req, res) => {
     // UPDATE THIS AFTER ALL MODELS HAVE BEEN CREATED
     Project.findAll({
-        attributes: [
-            'id', 
-            'title',
-            'description', 
-            'value',
-            'createdAt',
-            'updatedAt', 
-            [
-                sequelize.literal('(SELECT COUNT(*) FROM vote WHERE projectId = vote.projectId)'),
-                'voteCount'
-            ]
-        ],
+        attributes: {
+            include: [[Sequelize.fn("COUNT", Sequelize.col("votes.id")), "voteCount"]]
+        },
         include: [
             {
                 model: Comment,
@@ -35,7 +27,14 @@ router.get('/', (req, res) => {
             {
                 model: User,
                 attributes: ['username']
+            },
+            {
+                model: Vote,
+                attributes: [],
             }
+        ],
+        group: [
+            "project.id"
         ]
     })
     .then(dbProjectData => res.json(dbProjectData))
@@ -52,18 +51,9 @@ router.get('/:id', (req, res) => {
         where: {
             id: req.params.id
         },
-        attributes: [
-            'id', 
-            'title',
-            'description', 
-            'value',
-            'createdAt',
-            'updatedAt', 
-            [
-                sequelize.literal('(SELECT COUNT(*) FROM vote WHERE projectId = vote.projectId)'),
-                'voteCount'
-            ]
-        ],
+        attributes: {
+            include: [[Sequelize.fn("COUNT", Sequelize.col("votes.id")), "voteCount"]]
+        },
         // UPDATE THIS AFTER ALL MODELS HAVE BEEN CREATED
         include: [
             {
@@ -77,6 +67,10 @@ router.get('/:id', (req, res) => {
             {
                 model: User,
                 attributes: ['username']
+            },
+            {
+                model: Vote,
+                attributes: [],
             }
         ]   
     })

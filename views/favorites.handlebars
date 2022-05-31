@@ -18,6 +18,13 @@
 </section>
 
 <section>
+  <h2>My Projects:</h2>
+  {{#each projects as |project|}}
+    {{> project-info project }}
+  {{/each}}
+</section>
+
+<section>
   <h2>Voted Projects:</h2>
   {{#if user.projects.length }}
     <ol>

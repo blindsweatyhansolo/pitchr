@@ -3,30 +3,44 @@ const sequelize = require("../config/connection");
 const { User, Project, Vote, Comment } = require("../models");
 
 router.get("/", async (req, res) => {
-  const user = await User.findOne({
+  const dbProjects = await Project.findAll({
     where: {
-      id: req.session.userId,
+      userId: req.session.userId
     },
+    attributes: [
+      'id',
+      'title',
+      'description',
+      'createdAt',
+      [
+        sequelize.literal('(SELECT COUNT(*) FROM vote WHERE projectId = vote.projectId)'),
+        'voteCount'
+      ]
+    ],
     include: [
       {
-        model: Project
+        model: Comment,
+        attributes: ['id', 'text', 'projectId', 'userId', 'createdAt'],
+        include: {
+            model: User,
+            attributes: ['username']
+        }
       },
       {
-        model: Comment
-      },
-      {
-        model: Vote
+          model: User,
+          attributes: ['username']
       }
-    ] 
+    ]
   });
+
+  const projects = dbProjects.map(dbProject => dbProject.get({ plain: true }));
+
   res.render("favorites", {
-    user,
+    projects,
     loggedIn: req.session.loggedIn,
     username: req.session.username,
   });
 });
-
-
 
 router.get('/edit-project/:id', (req, res) => {
   // IF LOGGED IN USER IS PROJECT CREATOR THEN ALLOW EDIT
