@@ -1,0 +1,21 @@
+<form class="edit-project-form">
+    <div>
+        <input type="text" name="edit-project-title" id="edit-project-title" value="{{project.title}}">
+    </div>
+    <div>
+        <textarea name="edit-project-description" id="edit-project-description">{{project.description}}</textarea>
+    </div>
+    <div>
+        {{!-- RADIAL BUTTON? --}}
+        <button id="project-open">OPEN</button>
+        <button id="project-closed">CLOSED</button>
+    </div>
+
+    <div>
+        <button type="submit">SAVE</button>
+        <button class="delete-btn">DELETE</button>
+    </div>
+</form>
+
+<script src="/javascript/edit-project.js"></script>
+<script src="/javascript/delete-project.js"></script>

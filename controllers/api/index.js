@@ -16,5 +16,7 @@ router.use('/users', userRoutes);
 // appends '/comments' to all COMMENT routes
 router.use('/comments', commentRoutes);
 
+
+
 // EXPORT
 module.exports = router;
