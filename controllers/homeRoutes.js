@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const sequelize = require('../config/connection');
 const { Project, User, Comment, Vote } = require('../models');
+const withAuth = require("../utils/auth");
 
 
 // HOME ROUTES
@@ -51,7 +52,7 @@ router.get('/', (req, res) => {
 });
 
 // SINGLE PROJECT PAGE
-router.get('/project/:id', (req, res) => {
+router.get('/project/:id', withAuth, (req, res) => {
     Project.findOne({
         where: {
             id: req.params.id
@@ -95,7 +96,7 @@ router.get('/project/:id', (req, res) => {
         // pass data to template, second variable is logged in status
         res.render('single-project', {
             project,
-            // loggedIn: req.session.loggedIn
+            loggedIn: req.session.loggedIn
         });
         
         console.log(project);
