@@ -9,18 +9,9 @@ router.get('/', (req, res) => {
     // require authorization WITHAUTH
     // FIND ALL ACTIVE PROJECTS AND RENDER TO PAGE
     Project.findAll({
-        attributes: [
-            'id', 
-            'title',
-            'description', 
-            'value',
-            'createdAt',
-            'updatedAt',
-            [
-                sequelize.literal('(SELECT COUNT(*) FROM vote WHERE projectId = vote.projectId)'),
-                'voteCount'
-            ]
-        ],
+        attributes: {
+            include: [[Sequelize.fn("COUNT", Sequelize.col("votes.id")), "voteCount"]]
+        },
         include: [
             {
                 model: Comment,
@@ -33,8 +24,13 @@ router.get('/', (req, res) => {
             {
                 model: User,
                 attributes: ['username']
+            },
+            {
+                model: Vote,
+                attributes: []
             }
-        ]
+        ],
+        group: ["project.id"]
     })
     .then(dbProjectData => {
         // serialize the data
@@ -58,18 +54,9 @@ router.get('/project/:id', withAuth, (req, res) => {
         where: {
             id: req.params.id
         },
-        attributes: [
-            'id', 
-            'title',
-            'description', 
-            'value',
-            'createdAt',
-            'updatedAt',
-            [
-                sequelize.literal('(SELECT COUNT(*) FROM vote WHERE projectId = vote.projectId)'),
-                'voteCount'
-            ]
-        ],
+        attributes: {
+            include: [[Sequelize.fn("COUNT", Sequelize.col("votes.id")), "voteCount"]]
+        },
         include: [
             {
                 model: Comment,
@@ -83,7 +70,8 @@ router.get('/project/:id', withAuth, (req, res) => {
                 model: User,
                 attributes: ['username']
             }
-        ]
+        ],
+        group: ["project.id"]
     })
     .then(dbProjectData => {
         if (!dbProjectData) {

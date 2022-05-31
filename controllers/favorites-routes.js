@@ -1,3 +1,4 @@
+const Sequelize = require('sequelize');
 const router = require("express").Router();
 const sequelize = require("../config/connection");
 const { User, Project, Vote, Comment } = require("../models");
@@ -7,16 +8,9 @@ router.get("/", async (req, res) => {
     where: {
       userId: req.session.userId
     },
-    attributes: [
-      'id',
-      'title',
-      'description',
-      'createdAt',
-      [
-        sequelize.literal('(SELECT COUNT(*) FROM vote WHERE projectId = vote.projectId)'),
-        'voteCount'
-      ]
-    ],
+    attributes: {
+      include: [[Sequelize.fn("COUNT", Sequelize.col("votes.id")), "voteCount"]]
+    },
     include: [
       {
         model: Comment,
@@ -29,7 +23,14 @@ router.get("/", async (req, res) => {
       {
           model: User,
           attributes: ['username']
+      },
+      {
+        model: Vote,
+        attributes: []
       }
+    ],
+    group: [
+      "project.id"
     ]
   });
 

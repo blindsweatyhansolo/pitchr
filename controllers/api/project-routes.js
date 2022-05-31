@@ -72,7 +72,10 @@ router.get('/:id', (req, res) => {
                 model: Vote,
                 attributes: [],
             }
-        ]   
+        ],
+        group: [
+            "project.id"
+        ]  
     })
     .then(dbProjectData => {
         // if no matching id
