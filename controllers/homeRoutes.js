@@ -43,7 +43,8 @@ router.get('/', (req, res) => {
         res.render('homepage', {
             projects,
             // logged in status
-            loggedIn: req.session.loggedIn
+            loggedIn: req.session.loggedIn,
+            username: req.session.username
         });
 
         console.log(projects);

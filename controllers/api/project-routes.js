@@ -98,7 +98,6 @@ router.get('/:id', (req, res) => {
 // POST new Project (/api/projects)
 // active session must exist
 router.post('/', withAuth, (req, res) => {
-    if (req.session) {
         Project.create({
             // TEMPORARY PARAMS FOR TESTING
             // THESE FIELDS TO BE UPDATED TO MATCH FRONT-END PROJECT SUBMISSION FORM
@@ -114,7 +113,6 @@ router.post('/', withAuth, (req, res) => {
             console.log(err);
             res.status(400).json(err);
         });
-    }
 });
 
 // PUT route for upvoting project (/api/projects/upvote)

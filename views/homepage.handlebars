@@ -1,9 +1,12 @@
 {{!-- HOMEPAGE --}}
 {{#if loggedIn }}
+<div class="d-flex p-2 justify-content-center">
+    <p>Welcome, {{username}}!</p>
+</div>
 
-<ol>
+<ol class="d-flex justify-content-center flex-wrap flex-column">
     {{#each projects as |project|}}
-        <li>
+        <li class="list-unstyled">
             {{> project-info project}}
         </li>
     {{/each}}
@@ -11,14 +14,19 @@
 
 {{else}}
 
-<div class="splash">
-    <h2>
-        Welcome to Pitchr!
-    </h2>
-    <p>
-        Please login or sign up to get started!
-    </p> 
-    <a href="/login">LOGIN / SIGNUP</a>
+<div class="splash d-flex p-2 justify-content-center">
+    <div class="card text-center p-4 shadow">
+        <div class="card-body">
+            <h4 class="card-title">Welcome to Pitchr!</h4>
+            <div class="card-subtitle text-muted md-2">We're <em>full</em> of ideas!</div>
+        </div>
+        <p class="card-text p-2">
+            Hello! Need a place to pitch your next project? Look no further! <br>
+            Pitchr is an app where you can share and vote on project ideas with your cohorts. <br>
+            Log in or register using the link below to start!
+        </p>
+        <a href="/login" class="card-link btn">Login / Register</a>
+    </div>
 </div>
 
 {{/if}}

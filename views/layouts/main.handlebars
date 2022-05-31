@@ -14,11 +14,11 @@
     <link rel="stylesheet" href="/stylesheets/style.css">
     <title>Pitchr</title>
 </head>
-<body>
+<body class="bg-light">
     <header>
         {{!-- NAV --}}
         {{!-- NAV STICKS TO TOP OF PAGE THROUGH SCROLLING --}}
-        <nav class="navbar navbar-expand-lg bg-light justify-content-between">
+        <nav class="nav navbar navbar-expand-lg justify-content-between">
             <div class="container-fluid">
                 <a href="/" class="navbar-brand x-large fs-1">Pitchr</a>
                 {{!-- TOGGLES EXPANDABLE MENU BUTTON FOR BREAKPOINT--}}
@@ -38,18 +38,16 @@
                         {{!-- IF USER IS LOGGED IN, THEY WILL SEE LOGOUT OPTION --}}
                         {{#if loggedIn}}
                         <li class="nav-item">
-                            <a class="nav-link" id="logout" href="#">LOGOUT</button>
+                            <a class="nav-link" id="logout" href="#">LOGOUT</a>
                         </li>
                         {{/if}}
                     </ul>
                 </div>
             </div>
         </nav>
-
-
     </header>
 
-    <main>
+    <main class="container-fluid">
         {{{ body }}}
     </main>
 
