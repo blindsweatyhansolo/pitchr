@@ -14,8 +14,12 @@
 <body>
     <header>
         {{!-- NAV --}}
+
         {{!-- TEMPORARY LOGOUT BUTTON TO TEST LOGIC --}}
-        <button id="logout">LOGOUT</button>
+        {{#if loggedIn}}
+        <button id="logout" class="btn">LOGOUT</button>
+        {{/if}}
+        
     </header>
 
     <main>
