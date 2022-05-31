@@ -4,7 +4,7 @@ const router = require('express').Router();
 // ROUTE SCRIPTS
 const apiRoutes = require('./api');
 const homeRoutes = require('./homeRoutes');
-const favoritesRoutes = require('./favorites-routes.js');
+const favoritesRoutes = require('./favorites-routes');
 
 
 // PREFIXES FOR ROUTES

@@ -106,7 +106,7 @@ router.post('/', withAuth, (req, res) => {
             value: req.body.value,
             // UPDATE LATER SO USER/CREATOR VALUE GRABBED FROM SESSION
             // userId: req.session.userId
-            userId: req.body.userId
+            userId: req.session.userId
         })
         .then(dbProjectData => res.json(dbProjectData))
         .catch(err => {
