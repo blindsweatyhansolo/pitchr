@@ -4,6 +4,7 @@ const router = require('express').Router();
 const sequelize = require('../../config/connection');
 // import all models
 const { Project, Vote, User, Comment } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // GET all Projects (/api/projects)
 // includes User, Keyword, Vote, and Comment data
@@ -96,7 +97,7 @@ router.get('/:id', (req, res) => {
 
 // POST new Project (/api/projects)
 // active session must exist
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
     if (req.session) {
         Project.create({
             // TEMPORARY PARAMS FOR TESTING
@@ -119,7 +120,7 @@ router.post('/', (req, res) => {
 // PUT route for upvoting project (/api/projects/upvote)
 // MUST BE DEFINED BEFORE PUT /:id ROUTE!
 // active session must exist, set up later with session
-router.put('/upvote', (req, res) => {
+router.put('/upvote', withAuth, (req, res) => {
     // pass user id from session (userId: req.session.userId) UPDATE ME!!
     // along with all destructured properties on req.body
     // into static model method created in Project model: upvote(body, models)
@@ -135,7 +136,7 @@ router.put('/upvote', (req, res) => {
 
 // PUT update Project's title, description, value (/api/projects/:id)
 // active session must exist, set up later with session
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
     // update() method combines looking up and updating data
     Project.update(
         {
@@ -166,7 +167,7 @@ router.put('/:id', (req, res) => {
 
 // DELETE remove Project (/api/projects/:id)
 // require active session and authorization for deleting projects
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
     // destroy() method combines looking up and deleting data
     Project.destroy({
         where: {

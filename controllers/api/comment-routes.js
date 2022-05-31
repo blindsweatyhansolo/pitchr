@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const sequelize = require('../../config/connection');
 const { Comment, User, Project } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 router.get('/', (req, res) => {
     Comment.findAll()
@@ -41,7 +42,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
     Comment.create({
         text: req.body.text,
         projectId: req.body.projectId,
