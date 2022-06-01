@@ -101,6 +101,12 @@ router.get('/project/:id', withAuth, (req, res) => {
 
 // GET PROFILE PAGE
 router.get('/profile', withAuth, async (req, res) => {
+    const dbUser = await User.findOne({
+        where: {
+            id: req.session.userId
+        }
+    });
+
     const dbProjects = await Project.findAll({
         where: {
           userId: req.session.userId
@@ -132,9 +138,13 @@ router.get('/profile', withAuth, async (req, res) => {
       });
     
     const projects = dbProjects.map(dbProject => dbProject.get({ plain: true }));
+    const user = dbUser.get({ plain: true });
+
+    console.log(projects, user);
 
     res.render('profile', {
         projects,
+        user,
         loggedIn: req.session.loggedIn,
         username: req.session.username
     });
