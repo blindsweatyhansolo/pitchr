@@ -28,6 +28,11 @@
   <h2>My Projects:</h2>
   {{#each projects as |project|}}
     {{> project-info project }}
+    <div>
+      <a href="/favorites/edit-project/{{id}}" class="btn col-12">
+        EDIT
+      </a>
+    </div>
   {{/each}}
 </section>
 

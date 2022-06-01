@@ -90,7 +90,7 @@ router.get('/project/:id', withAuth, (req, res) => {
         // pass data to template, second variable is logged in status
         res.render('single-project', {
             project,
-            loggedIn: req.session.loggedIn
+            loggedIn: req.session.loggedIn,
         });
         
         console.log(project);
@@ -135,7 +135,7 @@ router.get('/profile', withAuth, async (req, res) => {
     res.render('profile', {
         projects,
         loggedIn: req.session.loggedIn,
-        username: req.session.userId
+        username: req.session.username
     });
 });
 
