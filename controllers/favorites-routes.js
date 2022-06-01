@@ -2,8 +2,9 @@ const Sequelize = require('sequelize');
 const router = require("express").Router();
 const sequelize = require("../config/connection");
 const { User, Project, Vote, Comment } = require("../models");
+const withAuth = require('../utils/auth');
 
-router.get("/", async (req, res) => {
+router.get("/", withAuth, async (req, res) => {
   const dbProjects = await Project.findAll({
     where: {
       userId: req.session.userId
@@ -43,7 +44,7 @@ router.get("/", async (req, res) => {
   });
 });
 
-router.get('/edit-project/:id', (req, res) => {
+router.get('/edit-project/:id', withAuth, (req, res) => {
   // IF LOGGED IN USER IS PROJECT CREATOR THEN ALLOW EDIT
   // OTHERWISE ALERT/MODAL CAN'T EDIT
   Project.findOne({

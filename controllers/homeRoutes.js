@@ -70,6 +70,10 @@ router.get('/project/:id', withAuth, (req, res) => {
             {
                 model: User,
                 attributes: ['username']
+            },
+            {
+                model: Vote,
+                attributes: []
             }
         ],
         group: ["project.id"]
