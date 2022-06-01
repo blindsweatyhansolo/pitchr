@@ -121,7 +121,14 @@ router.delete("/:id", async (req, res) => {
       id: req.params.id,
     },
   });
-  res.status(200).json({ message: 'Deleted.' });
+
+  if (req.session.loggedIn) {
+    await req.session.destroy(() => {
+      res.status(204).end();
+    });
+  }
+
+  // res.status(200).json({ message: 'Deleted.' });
 });
 
 
