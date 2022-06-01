@@ -4,19 +4,19 @@ async function commentFormHandler(event) {
     event.preventDefault();
 
     // Gather new comment text value from form
-    const commentText = document.querySelector('textarea[name="comment-body"]').value.trim();
+    const text = document.querySelector('textarea[name="comment-body"]').value.trim();
     // Grab Post ID value from URL string
     const projectId = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
     ];
 
     // IF text field has a value, perform POST request [/comments] using the stringified gathered values
-    if (commentText) {
+    if (text) {
         const response = await fetch('/api/comments', {
             method: 'POST',
             body: JSON.stringify({
                 projectId,
-                commentText
+                text
             }),
             headers: {
                 'Content-Type': 'application/json'

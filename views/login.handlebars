@@ -1,3 +1,54 @@
 {{!-- LOGIN PAGE --}}
 
-TEST
+
+{{!-- LOGIN FORM --}}
+<div class="welcome">
+    <p><em>Welcome back!</em></p>
+</div>
+
+<div class="">
+    <form class="login-form">
+        <div>
+            <label for="email-login" class="">Email:</label>
+            <input type="email" id="email-login" class="" />
+        </div>
+        <div>
+            <label for="password" class="">Password:</label>
+            <input type="password" id="password-login" class="" autocomplete="off" />
+        </div>
+        <div>
+            <button type="submit" class="btn btn-block">LOGIN</button>
+        </div>
+    </form>
+</div>
+
+{{!-- SIGN UP FORM --}}
+<div class="welcome">
+    <p><em>Not a member? Register below:</em></p>
+</div>
+<div class="">
+    <form class="signup-form">
+        <div class="">
+            <label for="username-signup" class="">Username:</label>
+            <input type="text" id="username-signup" class="" />
+        </div>
+        <div class="">
+            <label for="github-signup" class="">GitHub:</label>
+            <input type="text" id="github-signup" class="" />
+        </div>
+        <div class="">
+            <label for="email-signup" class="">Email:</label>
+            <input type="email" id="email-signup" class="" />
+        </div>
+        <div class="">
+            <label for="password" class="">Password:</label>
+            <input type="password" id="password-signup" class="" autocomplete="off" />
+        </div>
+        <div class="">
+            <button type="submit" class="btn btn-block">SIGN-UP</button>
+        </div>
+    </form>
+</div>
+
+{{!-- SCRIPT FOR LOGIN LOGIC public/javascript/login.js --}}
+<script src="/javascript/login.js"></script>

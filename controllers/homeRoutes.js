@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const sequelize = require('../config/connection');
 const { Project, User, Comment, Vote } = require('../models');
+const withAuth = require("../utils/auth");
 
 
 // HOME ROUTES
@@ -8,18 +9,9 @@ router.get('/', (req, res) => {
     // require authorization WITHAUTH
     // FIND ALL ACTIVE PROJECTS AND RENDER TO PAGE
     Project.findAll({
-        attributes: [
-            'id', 
-            'title',
-            'description', 
-            'value',
-            'createdAt',
-            'updatedAt',
-            [
-                sequelize.literal('(SELECT COUNT(*) FROM vote WHERE projectId = vote.projectId)'),
-                'voteCount'
-            ]
-        ],
+        attributes: {
+            include: [[Sequelize.fn("COUNT", Sequelize.col("votes.id")), "voteCount"]]
+        },
         include: [
             {
                 model: Comment,
@@ -32,8 +24,13 @@ router.get('/', (req, res) => {
             {
                 model: User,
                 attributes: ['username']
+            },
+            {
+                model: Vote,
+                attributes: []
             }
-        ]
+        ],
+        group: ["project.id"]
     })
     .then(dbProjectData => {
         // serialize the data
@@ -42,7 +39,8 @@ router.get('/', (req, res) => {
         res.render('homepage', {
             projects,
             // logged in status
-            // loggedIn: req.session.loggedIn
+            loggedIn: req.session.loggedIn,
+            username: req.session.username
         });
 
         console.log(projects);
@@ -51,23 +49,14 @@ router.get('/', (req, res) => {
 });
 
 // SINGLE PROJECT PAGE
-router.get('/project/:id', (req, res) => {
+router.get('/project/:id', withAuth, (req, res) => {
     Project.findOne({
         where: {
             id: req.params.id
         },
-        attributes: [
-            'id', 
-            'title',
-            'description', 
-            'value',
-            'createdAt',
-            'updatedAt',
-            [
-                sequelize.literal('(SELECT COUNT(*) FROM vote WHERE projectId = vote.projectId)'),
-                'voteCount'
-            ]
-        ],
+        attributes: {
+            include: [[Sequelize.fn("COUNT", Sequelize.col("votes.id")), "voteCount"]]
+        },
         include: [
             {
                 model: Comment,
@@ -81,7 +70,8 @@ router.get('/project/:id', (req, res) => {
                 model: User,
                 attributes: ['username']
             }
-        ]
+        ],
+        group: ["project.id"]
     })
     .then(dbProjectData => {
         if (!dbProjectData) {
@@ -95,7 +85,7 @@ router.get('/project/:id', (req, res) => {
         // pass data to template, second variable is logged in status
         res.render('single-project', {
             project,
-            // loggedIn: req.session.loggedIn
+            loggedIn: req.session.loggedIn
         });
         
         console.log(project);

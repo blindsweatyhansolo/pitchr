@@ -13,7 +13,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const sess = {
     secret: process.env.SECRET,
-    cookie: {maxAge: 300000},
+    cookie: {},
     resave: false,
     saveUninitialized: true,
     store: new SequelizeStore({
@@ -22,9 +22,9 @@ const sess = {
 };
 
 // // helpers section placeholder //
-// const helpers = require('./utils/helpers');
-const hbs = exphbs.create({});
-// const hbs = exphbs.create({ helpers });
+const helpers = require('./utils/helpers');
+// const hbs = exphbs.create({});
+const hbs = exphbs.create({ helpers });
 
 
 // middleware
