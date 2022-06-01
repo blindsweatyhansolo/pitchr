@@ -3,9 +3,6 @@ const sequelize = require("../../config/connection");
 
 const { User, Project, Vote } = require("../../models");
 
-
-// The `/api/categories` endpoint
-
 router.get("/", async (req, res) => {
   const user = await User.findAll(
     {
@@ -100,7 +97,8 @@ router.put('/:id', (req, res) => {
   User.update(req.body, {
       individualHooks: true,
       where: {
-          id: req.params.id
+        id: req.session.userId
+          // id: req.params.id
       }
     })
   .then(dbUserData => {
