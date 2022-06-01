@@ -91,6 +91,7 @@ router.get('/project/:id', withAuth, (req, res) => {
         res.render('single-project', {
             project,
             loggedIn: req.session.loggedIn,
+            userId: req.session.userId
         });
         
         console.log(project);

@@ -2,6 +2,9 @@
 
 {{!-- Project card --}}
 {{> project-info project }}
+<div class="d-flex justify-content-center">
+    <button class="upvote-btn btn col-12 col-md-4"><i class="bi bi-hand-thumbs-up"></i> Upvote</button>
+</div>
 
 {{!-- Form for adding new comment --}}
 <form class="comment-form">
@@ -20,5 +23,5 @@
 
 {{!-- UPDATE WITH NON-LOCAL ROUTE! --}}
 <script src="/javascript/comment.js"></script>
-
+<script src="/javascript/upvote.js"></script>
 {{!-- {{/if}} --}}
