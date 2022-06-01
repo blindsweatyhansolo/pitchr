@@ -140,6 +140,24 @@ router.get('/profile', withAuth, async (req, res) => {
     });
 });
 
+// EDIT PROFILE PAGE
+router.get('/profile/:id', withAuth, async (req, res) => {
+    const dbUser = await User.findOne({
+        where: {
+            id: req.session.userId
+        }
+    });
+
+    const user = dbUser.get({ plain: true });
+
+    res.render('edit-profile', {
+        user,
+        loggedIn: req.session.loggedIn,
+        username: req.session.username,
+        userId: req.session.userId
+    });
+});
+
 
 // LOGIN PAGE
 router.get('/login', (req, res) => {
