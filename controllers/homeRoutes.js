@@ -140,7 +140,7 @@ router.get('/profile', withAuth, async (req, res) => {
     const projects = dbProjects.map(dbProject => dbProject.get({ plain: true }));
     const user = dbUser.get({ plain: true });
 
-    console.log(projects, user);
+    // console.log(projects, user);
 
     res.render('profile', {
         projects,
