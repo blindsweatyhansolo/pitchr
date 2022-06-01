@@ -5,40 +5,44 @@ const { User, Project, Vote, Comment } = require("../models");
 const withAuth = require('../utils/auth');
 
 router.get("/", withAuth, async (req, res) => {
-  const dbProjects = await Project.findAll({
+  // select project ids from votes where the user id of the vote id matches the session id
+
+  const dbVotes = await Vote.findAll({
     where: {
       userId: req.session.userId
     },
-    attributes: {
-      include: [[Sequelize.fn("COUNT", Sequelize.col("votes.id")), "voteCount"]]
-    },
+    attributes: ['projectId'],
     include: [
       {
-        model: Comment,
-        attributes: ['id', 'text', 'projectId', 'userId', 'createdAt'],
-        include: {
+        model: Project,
+        attributes: ['id', 'title', 'description', 'createdAt'],
+        include: [
+          {
+            model: Comment
+          },
+          {
             model: User,
             attributes: ['username']
-        }
+          },
+          {
+            model: Vote,
+            attributes: []
+          }
+        ]
       },
       {
-          model: User,
-          attributes: ['username']
-      },
-      {
-        model: Vote,
-        attributes: []
+        model: User,
+        attributes: ['id', 'username']
       }
-    ],
-    group: [
-      "project.id"
     ]
   });
 
-  const projects = dbProjects.map(dbProject => dbProject.get({ plain: true }));
+  const votes = dbVotes.map(dbVote => dbVote.get({ plain: true }));
 
+  console.log(votes);
+  
   res.render("favorites", {
-    projects,
+    votes,
     loggedIn: req.session.loggedIn,
     username: req.session.username,
   });

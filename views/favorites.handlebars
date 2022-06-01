@@ -1,36 +1,10 @@
-{{!-- CREATE NEW PROJECT FORM --}}
-<section>
-  <h2>Create New Project:</h2>
-
-  <form class="new-project-form">
-    <div>
-      <label for="project-title">Title:</label>
-      <input type="text" id="project-title" name="project-title" />
-    </div>
-
-    <div>
-      <label for="project-description">Description:</label>
-      <input type="text" name="project-description" id="project-description" />
-    </div>
-
-    <button type="submit" class="btn">Create!</button>
-  </form>
-</section>
-
-<section>
-  <h2>My Projects:</h2>
-  {{#each projects as |project|}}
-    {{> project-info project }}
-  {{/each}}
-</section>
-
 <section>
   <h2>Voted Projects:</h2>
-  {{#if user.projects.length }}
+  {{#if votes.length }}
     <ol>
-      {{#each user.projects as |project| }}
+      {{#each votes as |vote| }}
       <li>
-        {{> project-info project }}
+        {{> project-info vote.project }}
       </li>
       {{/each}}
     </ol>
@@ -41,5 +15,3 @@
   </p>
   {{/if}}
 </section>
-
-<script src="/javascript/add-project.js"></script>

@@ -98,6 +98,47 @@ router.get('/project/:id', withAuth, (req, res) => {
     .catch(err => res.json(err));
 });
 
+// GET PROFILE PAGE
+router.get('/profile', withAuth, async (req, res) => {
+    const dbProjects = await Project.findAll({
+        where: {
+          userId: req.session.userId
+        },
+        attributes: {
+          include: [[Sequelize.fn("COUNT", Sequelize.col("votes.id")), "voteCount"]]
+        },
+        include: [
+          {
+            model: Comment,
+            attributes: ['id', 'text', 'projectId', 'userId', 'createdAt'],
+            include: {
+                model: User,
+                attributes: ['username']
+            }
+          },
+          {
+              model: User,
+              attributes: ['username']
+          },
+          {
+            model: Vote,
+            attributes: []
+          }
+        ],
+        group: [
+          "project.id"
+        ]
+      });
+    
+    const projects = dbProjects.map(dbProject => dbProject.get({ plain: true }));
+
+    res.render('profile', {
+        projects,
+        loggedIn: req.session.loggedIn,
+        username: req.session.userId
+    });
+});
+
 
 // LOGIN PAGE
 router.get('/login', (req, res) => {
