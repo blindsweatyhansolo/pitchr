@@ -7,10 +7,15 @@
       <label for="project-title">Title:</label>
       <input type="text" id="project-title" name="project-title" />
     </div>
-
+    {{!-- Add text area for short description, include separate paragraph to describe text area --}}
     <div>
-      <label for="project-description">Description:</label>
-      <input type="text" name="project-description" id="project-description" />
+      <label for="project-descriptionShort">Describe your pitch in just one concise sentence:</label>
+      <input type="text" id="project-descriptionShort" name="project-descriptionShort" />
+    </div>
+    {{!-- Add separate paragraph to describe text area --}}
+    <div>
+      <label for="project-descriptionLong">Describe youre pitch in more detail:</label>
+      <input type="text" name="project-descriptionLong" id="project-descriptionLong" />
     </div>
 
     <button type="submit" class="btn">Create!</button>

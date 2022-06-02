@@ -25,7 +25,8 @@ class Project extends Model {
                 attributes: [
                     'id',
                     'title',
-                    'description',
+                    'descriptionShort',
+                    'descriptionLong',
                     'value',
                     'createdAt',
                     [
@@ -54,13 +55,15 @@ Project.init(
                 len: [4]
             }
         },
-        description: {
+        descriptionShort: {
+            type: DataTypes.TEXT,
+            allowNull: false
+        },
+        descriptionLong: {
             type: DataTypes.TEXT,
             allowNull: false
         },
         userId: {
-            // UPDATE THIS AFTER USER MODEL CREATION
-            // foreign key association with user id
             type: DataTypes.INTEGER,
             references: {
                 model: 'user',
