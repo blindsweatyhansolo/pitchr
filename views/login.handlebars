@@ -1,53 +1,60 @@
 {{!-- LOGIN PAGE --}}
 
-
-{{!-- LOGIN FORM --}}
 <div class="welcome">
     <p><em>Welcome back!</em></p>
 </div>
 
-<div class="">
-    <form class="login-form">
-        <div>
-            <label for="email-login" class="">Email:</label>
-            <input type="email" id="email-login" class="" />
-        </div>
-        <div>
-            <label for="password" class="">Password:</label>
-            <input type="password" id="password-login" class="" autocomplete="off" />
-        </div>
-        <div>
-            <button type="submit" class="btn btn-block">LOGIN</button>
-        </div>
-    </form>
+<div class="card p-2 justify-content-center mx-auto col-5">
+    <div class="justify-content-center text-center p-6">
+        <h3>Login</h3>
+    </div>
+    {{!-- LOGIN FORM --}}
+    <div class="justify-content-center text-left p-3">
+        <form class="login-form">
+            <div class="form-group">
+                <label for="email-login">Email address</label>
+                <input type="email" id="email-login" class="form-control" placeholder="Enter email address"/>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password-login" class="form-control" placeholder="Password" autocomplete="off" />
+            </div>
+        </form>
+    </div>
+    <div class="button justify-content-center text-center">
+        <button type="submit" class="btn btn-primary">SIGN-UP</button>
+    </div>
 </div>
 
-{{!-- SIGN UP FORM --}}
-<div class="welcome">
-    <p><em>Not a member? Register below:</em></p>
-</div>
-<div class="">
-    <form class="signup-form">
-        <div class="">
-            <label for="username-signup" class="">Username:</label>
-            <input type="text" id="username-signup" class="" />
-        </div>
-        <div class="">
-            <label for="github-signup" class="">GitHub:</label>
-            <input type="text" id="github-signup" class="" />
-        </div>
-        <div class="">
-            <label for="email-signup" class="">Email:</label>
-            <input type="email" id="email-signup" class="" />
-        </div>
-        <div class="">
-            <label for="password" class="">Password:</label>
-            <input type="password" id="password-signup" class="" autocomplete="off" />
-        </div>
-        <div class="">
-            <button type="submit" class="btn btn-block">SIGN-UP</button>
-        </div>
-    </form>
+    {{!-- SIGN UP FORM --}}
+<div class="card p-2 justify-content-center mx-auto col-5">
+    <div class="welcome justify-content-center text-center">
+        <p><em>Not a member yet?</em></p>
+        <h3>Sign Up</h3>
+    </div>
+    <div class="justify-content-center text-left p-4">
+        <form class="signup-form">
+            <div class="form-group">
+                <label for="username-signup">Username</label>
+                <input type="text" id="username-signup" class="form-control" placeholder="Create a username"/>
+            </div>
+            <div class="form-group">
+                <label for="github-signup">GitHub username</label>
+                <input type="text" id="github-signup" class="form-control" placeholder="Enter your github username"/>
+            </div>
+            <div class="form-group">
+                <label for="email-signup">Email</label>
+                <input type="email" id="email-signup" class="form-control" placeholder="Enter your email" />
+            </div>
+            <div class="form-group">
+                <label for="password" class="">Password:</label>
+                <input type="password" id="password-signup" class="form-control" placeholder="Create a password"autocomplete="off" />
+            </div>
+        </form>
+    </div>
+    <div class="button justify-content-center text-center">
+        <button type="submit" class="btn btn-primary">SIGN-UP</button>
+    </div>
 </div>
 
 {{!-- SCRIPT FOR LOGIN LOGIC public/javascript/login.js --}}

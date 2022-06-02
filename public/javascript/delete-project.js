@@ -10,7 +10,7 @@ async function deleteProjectHandler(event) {
     });
 
     if (response.ok) {
-        document.location.replace('/favorites');
+        document.location.replace('/profile');
     } else {
         console.log(response.statusText);
     }

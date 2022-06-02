@@ -1,0 +1,57 @@
+{{!-- EDIT USER PROFILE PAGE --}}
+<section class="d-flex justify-content-center">
+    <div class="card col-12 col-md-8 my-3">
+        <h2 class="card-header text-center">
+            Hello {{username}}!
+        </h2>
+        <div class="card-body d-flex flex-column justify-content-center">
+            <form class="update-user-form col-12">
+                <div class="form-group">
+                    <label for="user-github">Update GitHub Username:</label>
+                    <input type="text" id="user-github" placeholder="{{user.github}}" value="{{user.github}}" class="form-control">
+
+                    <label for="user-email">Update Email:</label>
+                    <input type="email" id="user-email" placeholder="{{user.email}}" value="{{user.email}}" class="form-control">
+                    <small class="form-text text-muted">
+                        We never share your email with anyone else.
+                    </small>
+                    <br>
+
+                    <label for="user-password">Update Password:</label>
+                    <input type="password" id="user-password" autocomplete="off" value="{{user.password}}" class="form-control">
+                    <small class="form-text text-muted">
+                        Your password must be at least 6 characters long, must not contain spaces, special characters, or emoji.
+                    </small>
+
+                </div>
+                <br>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn col-12">
+                        <i class="bi bi-person-check"></i> Update
+                    </button>
+                </div>
+            </form>
+
+            <br>
+
+            <form class="col-12">
+                <div class="form-group">
+                    <label for="delete-profile">Delete Profile:</label>
+                    <br>
+                    <small class="form-text text-muted">
+                        <strong>WARNING:</strong> This is a permanent action! You will no longer be able to access any features on Pitchr until you register for a new account.
+                    </small>
+                </div>
+                <button class="btn delete-btn col-12">
+                    <i class="bi bi-person-x"></i> DELETE
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<input id="hiddenId" value="{{userId}}" hidden>
+
+{{!-- SCRIPT FILES FOR UPDATING USER AND DELETING USER --}}
+<script src="/javascript/update-user.js"></script>
+<script src="/javascript/delete-user.js"></script>

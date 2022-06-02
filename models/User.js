@@ -44,6 +44,7 @@ User.init(
 
         github: {
             type: DataTypes.STRING,
+            allowNull: true,
             unique: true
         },
     },

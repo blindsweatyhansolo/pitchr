@@ -1,3 +1,4 @@
+const Sequelize = require('sequelize');
 const router = require("express").Router();
 const sequelize = require('../config/connection');
 const { Project, User, Comment, Vote } = require('../models');
@@ -69,6 +70,10 @@ router.get('/project/:id', withAuth, (req, res) => {
             {
                 model: User,
                 attributes: ['username']
+            },
+            {
+                model: Vote,
+                attributes: []
             }
         ],
         group: ["project.id"]
@@ -85,12 +90,82 @@ router.get('/project/:id', withAuth, (req, res) => {
         // pass data to template, second variable is logged in status
         res.render('single-project', {
             project,
-            loggedIn: req.session.loggedIn
+            loggedIn: req.session.loggedIn,
+            userId: req.session.userId
         });
         
         console.log(project);
     })
     .catch(err => res.json(err));
+});
+
+// GET PROFILE PAGE
+router.get('/profile', withAuth, async (req, res) => {
+    const dbUser = await User.findOne({
+        where: {
+            id: req.session.userId
+        }
+    });
+
+    const dbProjects = await Project.findAll({
+        where: {
+          userId: req.session.userId
+        },
+        attributes: {
+          include: [[Sequelize.fn("COUNT", Sequelize.col("votes.id")), "voteCount"]]
+        },
+        include: [
+          {
+            model: Comment,
+            attributes: ['id', 'text', 'projectId', 'userId', 'createdAt'],
+            include: {
+                model: User,
+                attributes: ['username']
+            }
+          },
+          {
+              model: User,
+              attributes: ['username']
+          },
+          {
+            model: Vote,
+            attributes: []
+          }
+        ],
+        group: [
+          "project.id"
+        ]
+      });
+    
+    const projects = dbProjects.map(dbProject => dbProject.get({ plain: true }));
+    const user = dbUser.get({ plain: true });
+
+    // console.log(projects, user);
+
+    res.render('profile', {
+        projects,
+        user,
+        loggedIn: req.session.loggedIn,
+        username: req.session.username
+    });
+});
+
+// EDIT PROFILE PAGE
+router.get('/profile/:id', withAuth, async (req, res) => {
+    const dbUser = await User.findOne({
+        where: {
+            id: req.session.userId
+        }
+    });
+
+    const user = dbUser.get({ plain: true });
+
+    res.render('edit-profile', {
+        user,
+        loggedIn: req.session.loggedIn,
+        username: req.session.username,
+        userId: req.session.userId
+    });
 });
 
 

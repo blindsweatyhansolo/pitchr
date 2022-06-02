@@ -1,0 +1,60 @@
+{{!-- USER PROFILE CARD --}}
+<div class="d-flex justify-content-center flex-wrap my-4">
+
+  <section class="user-card card col-12 col-md-4 mx-1 shadow">
+    <h3 class="card-header">Profile:</h3>
+    <div class="card-title p-1 fs-2">
+      <i class="bi bi-file-person"></i> {{username}}
+    </div>
+    <div class="card-body">
+      <i class="bi bi-github"></i> {{user.github}}
+      <br>
+      <i class="bi bi-envelope"></i> {{user.email}}
+    </div>
+      <div class="p-4">
+        <a href="/profile/edit-profile/{{userId}}" class="btn col-12"><i class="bi bi-pencil-square"></i> Edit your profile</a>
+      </div>
+  </section>
+
+  <section class="new-project-card card col-12 col-md-5 shadow">
+    <h3 class="card-header">Create New Project:</h3>
+
+    <form class="new-project-form p-2">
+      <div class="form-group">
+        <label for="project-title">Title:</label>
+        <input type="text" id="project-title" name="project-title" class="form-control"/>
+      </div>
+
+      <div class="form-group">
+        <label for="project-description">Description:</label>
+        <input type="text" name="project-description" id="project-description" class="form-control"/>
+      </div>
+
+      <div class="col-12 p-4">
+        <button type="submit" class="btn col-12">Create!</button>
+      </div>
+    </form>
+  </section>
+
+
+  <section class="col-12 p-1">
+    <h2>My Projects:</h2>
+    {{#each projects as |project|}}
+      {{> project-info project }}
+      <div>
+        <a href="/favorites/edit-project/{{id}}" class="btn col-12">
+          EDIT
+        </a>
+      </div>
+    {{/each}}
+  </section>
+
+</div>
+
+<script src="/javascript/add-project.js"></script>
+
+
+{{!-- USER CREATED PROJECT LIST --}}
+{{!-- EACH PROJECT SHOULD HAVE EDIT/DELETE BUTTON --}}
+{{!-- EDIT BUTTON REDIRECTS TO EDIT-PROJECT PAGE --}}
+{{!-- DELETE BUTTON USES DELETE-PROJECT.JS --}}
