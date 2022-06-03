@@ -4,7 +4,8 @@ async function editProjectHandler(event) {
     event.preventDefault();
 
     const title = document.querySelector('input[name="edit-project-title"]').value;
-    const description = document.querySelector('input[name="project-description"]').value;
+    const descriptionShort = document.querySelector('input[name="project-descriptionShort"]').value;
+    const descriptionLong = document.querySelector('input[name="project-descriptionLong"]').value;
     const id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
     ];
@@ -13,7 +14,8 @@ async function editProjectHandler(event) {
         method: 'PUT',
         body: JSON.stringify({
             title,
-            description,
+            descriptionShort,
+            descriptionLong,
             // value
         }),
         headers: {
