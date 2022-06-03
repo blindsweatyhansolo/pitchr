@@ -1,11 +1,11 @@
 async function newProjectFormHandler(event) {
     event.preventDefault();
 
-    console.log('CLICK!');
 
     // Gather data from form
     const title = document.querySelector('input[name="project-title"]').value;
-    const description = document.querySelector('input[name="project-description"]').value;
+    const descriptionShort = document.querySelector('input[name="project-descriptionShort"]').value;
+    const descriptionLong = document.querySelector('input[name="project-descriptionLong"]').value;
     const value = 0;
 
 
@@ -13,7 +13,8 @@ async function newProjectFormHandler(event) {
         method: 'POST',
         body: JSON.stringify({
             title,
-            description,
+            descriptionShort,
+            descriptionLong,
             value
         }),
         headers: {

@@ -1,5 +1,4 @@
-{{!-- PARTIAL FOR PROJECTS --}}
-<article class="card justify-content-center mx-auto col-12 shadow-sm">
+<article class="card justify-content-center mx-auto card my-2 col-8 shadow-sm">
     <a href="/project/{{id}}">
         <div class="card-header">
             <h4 class="card-title">{{ title }}</h4>
@@ -10,7 +9,10 @@
             <i class="bi bi-person-lines-fill"></i> {{ user.username }}
         </h6>
         <p class="card-text p-3">
-            {{ descriptionShort }}
+            {{ project-descriptionShort }}
+        </p>
+        <p class="card-text p-3">
+            {{ project-descriptionLong }}
         </p>
     </div>
     <div class="card-footer text-muted px-3 d-flex justify-content-between">

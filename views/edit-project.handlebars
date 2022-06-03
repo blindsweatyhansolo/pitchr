@@ -4,8 +4,12 @@
         <input type="text" name="edit-project-title" id="edit-project-title" value="{{project.title}}">
     </div>
     <div>
-        <label for="edit-project-description">Description:</label>
-        <textarea name="edit-project-description" id="edit-project-description">{{project.description}}</textarea>
+        <label for="edit-project-descriptionShort">Short Description</label>
+        <textarea name="edit-project-descriptionShort" id="edit-project-descriptionShort">{{project.descriptionShort}}</textarea>
+    </div>
+    <div>
+        <label for="edit-project-descriptionLong">Full Description</label>
+        <textarea name="edit-project-descriptionLong" id="edit-project-descriptionLong">{{project.descriptionLong}}</textarea>
     </div>
     <div class="project-value">
         {{!-- RADIO BUTTON? --}}
