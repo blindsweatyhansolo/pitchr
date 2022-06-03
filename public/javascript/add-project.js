@@ -1,7 +1,6 @@
 async function newProjectFormHandler(event) {
     event.preventDefault();
 
-    console.log('CLICK!');
 
     // Gather data from form
     const title = document.querySelector('input[name="project-title"]').value;
