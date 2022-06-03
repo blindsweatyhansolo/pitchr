@@ -1,12 +1,13 @@
 async function newProjectFormHandler(event) {
     event.preventDefault();
 
+    console.log('click');
 
     // Gather data from form
     const title = document.querySelector('input[name="project-title"]').value;
     const descriptionShort = document.querySelector('input[name="project-descriptionShort"]').value;
-    const descriptionLong = document.querySelector('input[name="project-descriptionLong"]').value;
-    const value = 0;
+    const descriptionLong = document.querySelector('textarea[name="project-descriptionLong"]').value;
+    // const value = 0;
 
 
     const response = await fetch('api/projects', {
@@ -15,7 +16,7 @@ async function newProjectFormHandler(event) {
             title,
             descriptionShort,
             descriptionLong,
-            value
+            // value
         }),
         headers: {
             'Content-type': 'application/json'

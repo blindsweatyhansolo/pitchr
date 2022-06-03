@@ -101,7 +101,7 @@ router.post('/', withAuth, (req, res) => {
             title: req.body.title,
             descriptionShort: req.body.descriptionShort,
             descriptionLong: req.body.descriptionLong,
-            value: req.body.value,
+            // value: req.body.value,
             // UPDATE LATER SO USER/CREATOR VALUE GRABBED FROM SESSION
             // userId: req.session.userId
             userId: req.session.userId
@@ -139,8 +139,8 @@ router.put('/:id', withAuth, (req, res) => {
             // THESE FIELDS SHOULD MATCH FRONT-END PROJECT EDIT SUBMISSION FORM
             title: req.body.title,
             descriptionShort: req.body.descriptionShort,
-            descriptionLong: req.value.descriptionLong,
-            value: req.body.value
+            descriptionLong: req.body.descriptionLong
+            // value: req.body.value
         },
         {
             where: {

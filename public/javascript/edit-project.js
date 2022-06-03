@@ -4,12 +4,14 @@ async function editProjectHandler(event) {
     event.preventDefault();
 
     const title = document.querySelector('input[name="edit-project-title"]').value;
-    const descriptionShort = document.querySelector('input[name="project-descriptionShort"]').value;
-    const descriptionLong = document.querySelector('input[name="project-descriptionLong"]').value;
+    const descriptionShort = document.querySelector('textarea[name="edit-project-descriptionShort"]').value;
+    const descriptionLong = document.querySelector('textarea[name="edit-project-descriptionLong"]').value;
     const id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
     ];
     
+    console.log('click/submit', title, descriptionShort, descriptionLong, id);
+
     const response = await fetch(`/api/projects/${id}`, {
         method: 'PUT',
         body: JSON.stringify({
