@@ -1,22 +1,28 @@
-{{!-- Project card --}}
-{{> project-info project }}
-<div class="d-flex justify-content-center">
-    <button class="upvote-btn btn col-12 col-md-4"><i class="bi bi-hand-thumbs-up"></i> Upvote</button>
-</div>
+<div class="card justify-content-center mx-auto my-4 col-8">
 
-{{!-- Form for adding new comment --}}
-<form class="comment-form">
-    <div>
-        <textarea name="comment-body"></textarea>
+    {{!-- Project card --}}
+    {{> project-info project }}
+    <div class="d-flex justify-content-center">
+        <button class="upvote-btn btn col-12 col-md-4"><i class="bi bi-hand-thumbs-up"></i> Upvote</button>
     </div>
-    <div>
-        <button type="submit">Add Comment</button>
-    </div>
-</form>
 
-{{!-- List of all past comments --}}
-<div class="comments">
-    {{> comments project.comments }}
+    {{!-- Form for adding new comment --}}
+    <section class="container justify-content-center mx-auto card my-2 col-12">
+        <form class="new-comment-form mx-3 p-2">
+            <div>
+                <textarea class="form-control" id="new-comment" rows="3"></textarea>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-block">ADD COMMENT</button>
+            </div>
+        </form>
+    </section>
+
+    {{!-- List of all past comments --}}
+    <div class="comments">
+        {{> comments project.comments }}
+    </div>
+
 </div>
 
 <script src="/javascript/comment.js"></script>
