@@ -1,29 +1,33 @@
-<div class="card justify-content-center mx-auto my-4 col-8">
 
-    {{!-- Project card --}}
-    {{> project-infoLong project }}
-    <div class="d-flex justify-content-center">
-        <button class="upvote-btn btn col-12 col-md-4"><i class="bi bi-hand-thumbs-up"></i> Upvote</button>
+<section class="d-flex justify-content-center mx-auto col-8 flex-wrap flex-column">
+        {{!-- Project card --}}
+        {{> project-infoLong project}}
+    <div class="justify-content-center">
+        <button class="upvote-btn btn col-12"><i class="bi bi-hand-thumbs-up"></i>Like this project</button>
     </div>
+</section>
 
     {{!-- Form for adding new comment --}}
-    <section class="container justify-content-center mx-auto card my-2 col-12">
-        <form class="comment-form mx-3 p-2">
-            <div>
-                <textarea class="form-control" id="new-comment" name="comment-body" rows="3"></textarea>
-            </div>
-            <div>
-                <button type="submit" class="btn btn-block">ADD COMMENT</button>
-            </div>
-        </form>
-    </section>
+<section class="d-flex justify-content-center mx-auto col-8 flex-wrap flex-column">
+    <form class="comment-form my-3">
+        <div>
+            <textarea class="form-control" id="new-comment" name="comment-body" rows="3" placeholder="Add a comment for this project"></textarea>
+        </div>
+        <div class="justify-content-center">
+            <button type="submit" class="btn col-12">ADD COMMENT</button>
+        </div>
+    </form>
+</section>
 
     {{!-- List of all past comments --}}
+<section class="d-flex justify-content-center mx-auto col-8 flex-wrap flex-column">
+    <div class="card-title p-2">
+        <h6>Comments</h6>
+    </div>
     <div class="comments">
         {{> comments project.comments }}
     </div>
-
-</div>
+</section>
 
 <script src="/javascript/comment.js"></script>
 <script src="/javascript/upvote.js"></script>
