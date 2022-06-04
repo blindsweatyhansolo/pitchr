@@ -44,9 +44,3 @@ Comment.init(
 )
 
 module.exports = Comment;
-
-// ID - INTEGER Cannot be NULL Primary Key Auto-Increment
-// Text - TEXT Cannot be NULL
-// Project- references Project model (foreign key) Cannot be NULL
-// Creator - references User model (foreign key) Cannot be NULL
-// Timestamps: TRUE

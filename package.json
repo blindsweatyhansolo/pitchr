@@ -29,6 +29,7 @@
     "jest": "^28.1.0",
     "js-confetti": "^0.10.2",
     "mysql2": "^2.3.3",
+    "passport": "^0.6.0",
     "sequelize": "^6.20.0"
   },
   "devDependencies": {

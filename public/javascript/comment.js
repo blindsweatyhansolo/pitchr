@@ -10,6 +10,8 @@ async function commentFormHandler(event) {
         window.location.toString().split('/').length - 1
     ];
 
+    console.log('CLICK', text, projectId);
+
     // IF text field has a value, perform POST request [/comments] using the stringified gathered values
     if (text) {
         const response = await fetch('/api/comments', {

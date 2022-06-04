@@ -1,16 +1,16 @@
 {{!-- EDIT USER PROFILE PAGE --}}
 <section class="d-flex justify-content-center">
-    <div class="card col-12 col-md-8 my-3">
+    <div class="card col-8 my-3">
         <h2 class="card-header text-center">
             Hello {{username}}!
         </h2>
         <div class="card-body d-flex flex-column justify-content-center">
             <form class="update-user-form col-12">
                 <div class="form-group">
-                    <label for="user-github">Update GitHub Username:</label>
+                    <label for="user-github">Update GitHub Username</label>
                     <input type="text" id="user-github" placeholder="{{user.github}}" value="{{user.github}}" class="form-control">
 
-                    <label for="user-email">Update Email:</label>
+                    <label for="user-email">Update Email</label>
                     <input type="email" id="user-email" placeholder="{{user.email}}" value="{{user.email}}" class="form-control">
                     <small class="form-text text-muted">
                         We never share your email with anyone else.

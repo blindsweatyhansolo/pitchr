@@ -1,25 +1,36 @@
-<form class="edit-project-form">
-    <div>
-        <label for="edit-project-title">Title:</label>
-        <input type="text" name="edit-project-title" id="edit-project-title" value="{{project.title}}">
-    </div>
-    <div>
-        <label for="edit-project-description">Description:</label>
-        <textarea name="edit-project-description" id="edit-project-description">{{project.description}}</textarea>
-    </div>
-    <div class="project-value">
-        {{!-- RADIO BUTTON? --}}
-        <p>Project Status:</p>
-        {{!-- <input type="checkbox" name="project-status" id="close"> Close project --}}
-        {{!-- <input type="radio" name="project-status" id="open" value="0" checked>OPEN
-        <input type="radio" name="project-status" id="closed" value="1">CLOSED --}}
-    </div>
+{{!-- EDIT PROJECT PAGE --}}
+<section class="d-flex justify-content-center">
+    <div class="card col-8 my-3">
+        <h2 class="card-header text-center">
+            Edit {{project.title}}
+        </h2>
+        <div class="card-body d-flex flex-column justify-content-center">
+            <form class="edit-project-form col-12">
+                <div class="form-group">
+                    <label for="edit-project-title">Title:</label>
+                    <input type="text" name="edit-project-title" class="form-control" id="edit-project-title" value="{{project.title}}">
+                </div>
+                <div>
+                    <label for="edit-project-descriptionShort">Short Description</label>
+                    <textarea name="edit-project-descriptionShort" class="form-control" id="edit-project-descriptionShort">{{project.descriptionShort}}</textarea>
+                </div>
+                <div>
+                    <label for="edit-project-descriptionLong">Full Description</label>
+                    <textarea name="edit-project-descriptionLong" rows="4" class="form-control" id="edit-project-descriptionLong">{{project.descriptionLong}}</textarea>
+                </div>
 
-    <div>
-        <button type="submit" class="btn">SAVE</button>
-        <button class="delete-btn btn">DELETE</button>
+                <br>
+
+                <div>
+                    <button type="submit" class="btn col-12 my-2">SAVE</button>
+                </div>
+                <div>
+                    <button class="delete-btn btn col-12 my-2">DELETE</button>
+                </div>
+            </form>
+        </div>
     </div>
-</form>
+</section>
 
 <script src="/javascript/edit-project.js"></script>
 <script src="/javascript/delete-project.js"></script>

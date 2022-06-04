@@ -99,8 +99,9 @@ router.post('/', withAuth, (req, res) => {
             // TEMPORARY PARAMS FOR TESTING
             // THESE FIELDS TO BE UPDATED TO MATCH FRONT-END PROJECT SUBMISSION FORM
             title: req.body.title,
-            description: req.body.description,
-            value: req.body.value,
+            descriptionShort: req.body.descriptionShort,
+            descriptionLong: req.body.descriptionLong,
+            // value: req.body.value,
             // UPDATE LATER SO USER/CREATOR VALUE GRABBED FROM SESSION
             // userId: req.session.userId
             userId: req.session.userId
@@ -129,7 +130,7 @@ router.put('/upvote', withAuth, (req, res) => {
     });
 });
 
-// PUT update Project's title, description, value (/api/projects/:id)
+// PUT update Project's title, descriptionShort, descriptionLong, value (/api/projects/:id)
 // active session must exist, set up later with session
 router.put('/:id', withAuth, (req, res) => {
     // update() method combines looking up and updating data
@@ -137,8 +138,9 @@ router.put('/:id', withAuth, (req, res) => {
         {
             // THESE FIELDS SHOULD MATCH FRONT-END PROJECT EDIT SUBMISSION FORM
             title: req.body.title,
-            description: req.body.description,
-            value: req.body.value
+            descriptionShort: req.body.descriptionShort,
+            descriptionLong: req.body.descriptionLong
+            // value: req.body.value
         },
         {
             where: {
