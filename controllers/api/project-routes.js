@@ -12,8 +12,16 @@ const withAuth = require('../../utils/auth');
 router.get('/', (req, res) => {
     // UPDATE THIS AFTER ALL MODELS HAVE BEEN CREATED
     Project.findAll({
-        attributes: {
-            include: [[Sequelize.fn("COUNT", Sequelize.col("votes.id")), "voteCount"]]
+        attributes: [
+            'id',
+            'title',
+            'descriptionShort',
+            'descriptionLong',
+            'value',
+            'createdAt',
+            [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE postId = vote.postId'), 'vote_count']
+        ],
+        include: [[Sequelize.fn("COUNT", Sequelize.col("votes.id")), "voteCount"]]
         },
         include: [
             {

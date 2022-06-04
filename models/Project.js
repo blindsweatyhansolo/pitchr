@@ -34,6 +34,16 @@ class Project extends Model {
                         sequelize.literal('(SELECT COUNT(*) FROM vote WHERE projectId = vote.projectId)'),
                         'voteCount'
                     ]
+                ],
+                include: [
+                    {
+                        model: models.Comment,
+                        attributes: ['id', 'text', 'projectId', 'userId'],
+                        include: {
+                            model: models.User,
+                            attributes: ['username']
+                        }
+                    }
                 ]
             });
         });
