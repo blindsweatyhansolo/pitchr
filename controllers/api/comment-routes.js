@@ -49,7 +49,7 @@ router.post('/', withAuth, (req, res) => {
         userId: req.session.userId
         // creatorId: req.session.userId
     })
-    .then(dbCommentData => res.json(dbCommentData))
+    .then(() => res.sendStatus(200))
     .catch(err => {
         res.status(500).json(err);
     });

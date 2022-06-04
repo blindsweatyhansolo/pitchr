@@ -45,10 +45,6 @@ function generateProjectArticle(project) {
       </div>`
 }
 
-getAndRenderProjects()
-
-//getAndRenderProjects().then(r => console.log(r));
-
 async function newProjectFormHandler(event) {
     event.preventDefault();
 
@@ -87,3 +83,5 @@ async function newProjectFormHandler(event) {
 };
 
 document.querySelector('.new-project-form').addEventListener('submit', newProjectFormHandler);
+
+getAndRenderProjects();
