@@ -8,12 +8,16 @@ const Comment = require('./Comment');
 
 // CONNET ONE USER TO MANY PROJECTS
 User.hasMany(Project, {
-    foreignKey: 'userId'
+    foreignKey: 'userId',
+
+    onDelete: 'cascade'
 });
 
 // CONNET ONE PROJECT TO ONE USER
 Project.belongsTo(User, {
-    foreignKey: 'userId'
+    foreignKey: 'userId',
+
+    onDelete: 'cascade'
 });
 
 // CONNECT ONE USER TO MANY PROJECTS THROUGH VOTE
@@ -52,36 +56,32 @@ Project.hasMany(Vote, {
     foreignKey: 'projectId'
 });
 
-// // CONNECT ONE PROJECT TO MANY KEYWORDS THROUGH PROJECTKEYWORD
-// Project.belongsToMany(Keyword, {
-//     through: ProjectKeyword,
-//     foreignKey: 'projectId'
-// });
 
-// // CONNECT ONE KEYWORD TO MANY PROJECTS THROUGH PROJECTKEYWORD
-// Keyword.belongsToMany(Project, {
-//     through: ProjectKeyword,
-//     foreignKey: 'keywordId'
-// });
+// COMMENT ONE USER TO MANY COMMENTS
+User.hasMany(Comment, {
+    foreignKey: 'userId',
+
+    onDelete: 'cascade'
+});
 
 // CONNECT ONE COMMENT TO ONE USER
 Comment.belongsTo(User, {
     foreignKey: 'userId'
 });
 
-// CONNECT ONE COMMENT TO ONE PROJECT
-Comment.belongsTo(Project, {
-    foreignKey: 'projectId'
-});
-
-// COMMENT ONE USER TO MANY COMMENTS
-User.hasMany(Comment, {
-    foreignKey: 'userId'
-});
-
 // CONNECT ONE POST TO MANY COMMENTS
 Project.hasMany(Comment, {
-    foreignKey: 'projectId'
+    foreignKey: 'projectId',
+
+    onDelete: 'cascade'
 });
+
+// CONNECT ONE COMMENT TO ONE PROJECT
+Comment.belongsTo(Project, {
+    foreignKey: 'projectId',
+
+    onDelete: 'cascade'
+});
+
 
 module.exports = { Project, Vote, Keyword, ProjectKeyword, User, Comment };
