@@ -39,14 +39,16 @@
 
   <section class="col-12 p-1">
     <h2>My Projects:</h2>
-    {{#each projects as |project|}}
+    <div id="projects-holder"></div>
+    {{!-- {{#each projects as |project|}}
       {{> project-info project }}
       <div>
         <a href="/favorites/edit-project/{{id}}" class="btn col-12">
           EDIT
         </a>
       </div>
-    {{/each}}
+
+    {{/each}} --}}
   </section>
 
 </div>
