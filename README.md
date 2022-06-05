@@ -1,13 +1,13 @@
 # Pitchr
-Pitchr is a full stack web application where a user can pitch an idea for their next project, share, comment, and vote on project ideas. To get started, all the user has to do is register!
+Pitchr is a full stack web application where a user can pitch an idea for their next project, share, comment, and vote on project ideas. Registered to get started! 
 
 
 # Table of Contents 
 - [Table of Contents](#table-of-contents)
-- [Utilities Used](#utilities-used)
+- [Dependencies](#dependencies)
 - [Finished Product](#finished-product)
 - [Installation and Usage](#installation-and-usage)
-- [Collaborators](#tools-and-collaborators)
+- [Collaborators](#collaborators)
 - [Questions](#questions)
 
 
@@ -28,20 +28,30 @@ Pitchr is a full stack web application where a user can pitch an idea for their 
 
 
 # Finished Product
-*screenshots*
+Screenshot of desktop version
+
+![Screenshot of desktop version](./assets/fast-plateau-30072.herokuapp.com_%20(1).png)
+
+<br></br>
+
+Screenshot of mobile version
+
+![Screenshot of mobile version](./assets/fast-plateau-30072.herokuapp.com_.png)
 
 
 # Installation and Usage
 Pitchr was uploaded to the following GitHub repository:
+
 https://github.com/blindsweatyhansolo/pitchr
+
 
 Pitchr was deployed using Heroku:
 
-
-
 # Collaborators
-Jack S. https://github.com/blindsweatyhansolo/pitchr
+Jack S. https://github.com/blindsweatyhansolo/pitchr\
+
 Sam M.  https://github.com/samdakota
+
 Hanna L. https://github.com/hlee92
 
 
