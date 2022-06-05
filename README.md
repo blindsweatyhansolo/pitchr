@@ -42,10 +42,12 @@ Screenshot of mobile version
 # Installation and Usage
 Pitchr was uploaded to the following GitHub repository:
 
-https://github.com/blindsweatyhansolo/pitchr
+[Pitchr Repo](https://github.com/blindsweatyhansolo/pitchr)
 
 
 Pitchr was deployed using Heroku:
+
+[Pitchr Deployed](https://fast-plateau-30072.herokuapp.com/)
 
 # Collaborators
 Jack S. https://github.com/blindsweatyhansolo/pitchr\
