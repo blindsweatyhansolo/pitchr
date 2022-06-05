@@ -1,7 +1,7 @@
 // PROJECT MODEL
-const req = require('express/lib/request');
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+const Sequelize = require('sequelize');
 
 class Project extends Model {
     // MODEL METHOD FOR VOTING
