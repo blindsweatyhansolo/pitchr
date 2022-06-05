@@ -28,7 +28,7 @@ function generateProjectArticle(project) {
             <i class="bi bi-person-lines-fill"></i>${project.user.username}
         </h6>
         <p class="card-text p-3">
-            ${project.description}
+            ${project.descriptionShort}
         </p>
     </div>
     <div class="card-footer text-muted px-3 d-flex justify-content-between">

@@ -18,7 +18,7 @@
     <div class="card-footer text-muted px-3 d-flex justify-content-between">
         <p><i class="bi bi-calendar3"></i> {{ formatDate createdAt }}</p>
         <p><i class="bi bi-chat-right-text"></i> {{ comments.length }} {{ formatPlural "comment" comments.length }}</p>
-        <p><i class="bi bi-hand-thumbs-up"></i> {{ project.voteCount }} {{ formatPlural "vote" project.voteCount }}</p>
+        <p><i class="bi bi-hand-thumbs-up"></i> {{ vote.voteCount }} {{ formatPlural "vote" vote.voteCount }}</p>
     </div>
 
 </article>
