@@ -1,0 +1,21 @@
+/* STYLESHEET */
+:root {
+    --primary-color: #5F7161;
+    --secondary-color: #7BC787;
+}
+
+.nav {
+    background-color: var(--secondary-color);
+}
+
+.btn {
+    background-color: var(--secondary-color);
+}
+
+.btn:hover {
+    background-color: var(--primary-color);
+}
+
+a {
+    text-decoration: none;
+}

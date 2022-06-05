@@ -1,0 +1,20 @@
+<div class="d-flex my-2 justify-content-center">
+  <h4>
+    {{username}}'s favorite projects
+  </h4>
+</div>
+
+{{#if votes.length }}
+  <ol class="d-flex justify-content-center mx-auto col-8 flex-wrap flex-column">
+    {{#each votes as |vote| }}
+    <li class="list-unstyled">
+      {{> project-info vote.project }}
+    </li>
+    {{/each}}
+  </ol>
+
+{{else}}
+<p>
+  No upvoted projects yet!
+</p>
+{{/if}}

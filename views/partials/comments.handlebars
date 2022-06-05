@@ -1,1 +1,11 @@
 {{!-- PARTIAL FOR COMMENTS --}}
+{{#each this}}
+<div class="comment card justify-center mx-auto col-12">
+    <div class="card-body p-4">
+        <p><i class="bi bi-person-circle"></i> {{user.username}} on {{ formatDate createdAt }}</p>
+        <p class="card-text p-3">
+            {{text}}
+        </p>
+    </div>
+</div>
+{{/each}}

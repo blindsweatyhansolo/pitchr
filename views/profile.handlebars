@@ -1,0 +1,67 @@
+{{!-- USER PROFILE CARD --}}
+<div class="container justify-content-center mx-auto my-4">
+
+  <section class="user-card justify-content-center mx-auto card my-2 col-8 shadow">
+    <h3 class="card-header">Your Profile</h3>
+    <div class="card-title mx-3 p-1 fs-2">
+      <i class="bi bi-file-person"></i> {{username}}
+    </div>
+    <div class="card-body mx-3">
+      <i class="bi bi-github"></i> {{user.github}}
+      <br>
+      <i class="bi bi-envelope"></i> {{user.email}}
+    </div>
+      <div class="mx-3 p-4">
+        <a href="/profile/edit-profile/{{userId}}" class="btn col-12"><i class="bi bi-pencil-square"></i> Edit your profile</a>
+      </div>
+  </section>
+
+  <section class="new-project-card card justify-content-center mx-auto my-4 col-8 shadow">
+    <h3 class="card-header">Create New Project</h3>
+
+    <form class="new-project-form mx-3 p-2">
+      <div class="form-group mt-1">
+        <label for="project-title">Title</label>
+        <input type="text" id="project-title" name="project-title" class="form-control" placeholder="Enter a title for your project"/>
+      </div>
+
+      <div class="form-group mt-1">
+        <label for="project-descriptionShort">Short Description</label>
+        <input type="text" name="project-descriptionShort" id="project-descriptionShort" class="form-control" placeholder="Describe your project in one concise sentence."/>
+      </div>
+
+      <div class="form-group mt-1">
+        <label for="project-descriptionLong">Full Description</label>
+        <textarea class="form-control" name="project-descriptionLong" id="project-descriptionLong" rows="5" placeholder="Describe your project in more detail."></textarea>
+      </div>
+
+      <div class="col-12 mt-1 p-4">
+        <button type="submit" class="btn col-12">Create!</button>
+      </div>
+    </form>
+  </section>
+
+
+  <section class="col-12 p-1">
+    <h2>My Projects:</h2>
+    <div id="projects-holder"></div>
+    {{!-- {{#each projects as |project|}}
+      {{> project-info project }}
+      <div class="user-project">
+        <a href="/favorites/edit-project/{{id}}" class="btn btn-light col-12">
+          EDIT PROJECT
+        </a>
+      </div>
+
+    {{/each}} --}}
+  </section>
+
+</div>
+
+<script src="/javascript/add-project.js"></script>
+
+
+{{!-- USER CREATED PROJECT LIST --}}
+{{!-- EACH PROJECT SHOULD HAVE EDIT/DELETE BUTTON --}}
+{{!-- EDIT BUTTON REDIRECTS TO EDIT-PROJECT PAGE --}}
+{{!-- DELETE BUTTON USES DELETE-PROJECT.JS --}}

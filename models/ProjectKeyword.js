@@ -1,30 +1,31 @@
-// VOTE MODEL
+// PROJECTKEYWORD MODEL
+// this model is necessary to properly assign mulitple keywords to
+// a single project using the through() method in associations
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Vote extends Model {};
+class ProjectKeyword extends Model {};
 
-Vote.init(
+ProjectKeyword.init(
     {
         id: {
             type: DataTypes.INTEGER,
+            allowNull: false,
             primaryKey: true,
             autoIncrement: true
         },
-        // UPDATE TO INCLUDE THESE FIELDS ONCE MERGED WITH ALL MODELS
-        userId: {
+        projectId: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
             references: {
-                model: 'user',
+                model: 'project',
                 key: 'id'
             }
         },
-        projectId: {
+        keywordId: {
             type: DataTypes.INTEGER,
-            allowNull: false,
             references: {
-                model: 'project',
+                model: 'keyword',
                 key: 'id'
             }
         }
@@ -34,8 +35,8 @@ Vote.init(
         timestamps: false,
         freezeTableName: true,
         underscored: false,
-        modelName: 'vote'
+        modelName: 'projectKeyword'
     }
 );
 
-module.exports = Vote;
+module.exports = ProjectKeyword;

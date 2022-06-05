@@ -1,5 +1,4 @@
-{{!-- PARTIAL FOR PROJECTS --}}
-<article class="card justify-content-center mx-auto my-2 col-12 shadow-sm">
+<article class="card justify-content-center mx-auto card mt-4 col-12 shadow-sm">
     <a href="/project/{{id}}">
         <div class="card-header">
             <h4 class="card-title">{{ title }}</h4>
@@ -9,14 +8,17 @@
         <h6 class="card-subtitle mb-2 text-muted">
             <i class="bi bi-person-lines-fill"></i> {{ user.username }}
         </h6>
-        <p class="card-text p-3">
+        <em class="card-text p-3">
             {{ descriptionShort }}
+        </em>
+        <p class="card-text p-3">
+            {{ descriptionLong }}
         </p>
     </div>
     <div class="card-footer text-muted px-3 d-flex justify-content-between">
         <p><i class="bi bi-calendar3"></i> {{ formatDate createdAt }}</p>
         <p><i class="bi bi-chat-right-text"></i> {{ comments.length }} {{ formatPlural "comment" comments.length }}</p>
-        <p><i class="bi bi-hand-thumbs-up"></i> {{ voteCount }} {{ formatPlural "vote" voteCount }}</p>
+        <p><i class="bi bi-hand-thumbs-up"></i> {{ vote.voteCount }} {{ formatPlural "vote" vote.voteCount }}</p>
     </div>
 
 </article>
