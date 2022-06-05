@@ -56,7 +56,7 @@ router.get('/project/:id', withAuth, (req, res) => {
             id: req.params.id
         },
         attributes: {
-            include: [[Sequelize.fn("COUNT", Sequelize.col("votes.id")), "voteCount"]]
+            include: [[Sequelize.fn("COUNT", Sequelize.col("votes.projectId")), "voteCount"]]
         },
         include: [
             {
@@ -86,6 +86,7 @@ router.get('/project/:id', withAuth, (req, res) => {
 
         // serialize the data
         const project = dbProjectData.get({ plain: true });
+        console.log(project)
 
         // pass data to template, second variable is logged in status
         res.render('single-project', {

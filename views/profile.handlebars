@@ -42,18 +42,18 @@
   </section>
 
 
-  <section class="justify-content-center mx-auto my-2 col-8 p-1">
-    <h2>My Projects</h2>
-    {{#each projects as |project|}}
-    <div class="container p-3">
+  <section class="col-12 p-1">
+    <h2>My Projects:</h2>
+    <div id="projects-holder"></div>
+    {{!-- {{#each projects as |project|}}
       {{> project-info project }}
       <div class="user-project">
         <a href="/favorites/edit-project/{{id}}" class="btn btn-light col-12">
           EDIT PROJECT
         </a>
       </div>
-    </div>
-    {{/each}}
+
+    {{/each}} --}}
   </section>
 
 </div>

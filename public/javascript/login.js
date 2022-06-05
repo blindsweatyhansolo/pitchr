@@ -5,6 +5,7 @@ async function loginFormHandler(event) {
     // pull data from login form
     const email = document.querySelector('#email-login').value.trim();
     const password = document.querySelector('#password-login').value.trim();
+    
 
     // verify fields have values
     if (email && password) {
@@ -35,6 +36,7 @@ async function signupFormHandler(event) {
     const email = document.querySelector('#email-signup').value.trim();
     const github = document.querySelector('#github-signup').value.trim();
     const password = document.querySelector('#password-signup').value.trim();
+    
 
     // verify fields have values, perform POST request
     if (username && email && password) {
@@ -56,6 +58,7 @@ async function signupFormHandler(event) {
             // CHANGE TO MODAL!! //
         }
     }
+    
 };
 
 
