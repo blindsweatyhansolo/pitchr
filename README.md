@@ -47,7 +47,7 @@ Pitchr was uploaded to the following GitHub repository:
 
 Pitchr was deployed using Heroku:
 
-[Pitchr Deployed](https://fast-plateau-30072.herokuapp.com/)
+[Pitchr Deployed](https://pitchr314.herokuapp.com/)
 
 # Collaborators
 Jack S. https://github.com/blindsweatyhansolo/pitchr\
