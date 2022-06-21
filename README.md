@@ -50,7 +50,7 @@ Pitchr was deployed using Heroku:
 [Pitchr Deployed](https://pitchr314.herokuapp.com/)
 
 # Collaborators
-Jack S. https://github.com/blindsweatyhansolo/pitchr\
+Jack S. https://github.com/blindsweatyhansolo/
 
 Sam M.  https://github.com/samdakota
 
